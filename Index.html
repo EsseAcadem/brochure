@@ -1,0 +1,1827 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>DT&amp;I Training </title>
+<meta name="description" content="DT&I Training Academy Brochure — searchable, filterable, single-file HTML version.">
+<style>
+  :root{
+    --bg:#0a0d1a; --panel:#0f1426; --card:#005b7a; --cardTop:#0b1430;
+    --ink:#f5f7fb; --muted:#b9c0cf; --line:rgba(255,255,255,.14);
+    --brand:#ffd84d; --accent:#4dd2ff; --chip:#1b2447; --chipOn:#fff6cc; --chipOnText:#1c2240;
+    --btn:#121b3a; --btnOn:#233161; --radius:18px; --ring:0 0 0 3px rgba(77,210,255,.35);
+    --shadow:0 10px 30px rgba(0,0,0,.25);
+
+    --page:#ffffff; --inkLight:#1c2237; --lineLight:#e1e6f0;
+    --chipLight:#eef2f9; --chipLightOn:#0b5bd3; --chipLightOnText:#ffffff;
+    --btnLight:#f3f6fc; --btnLightOn:#e7ecf7;
+  }
+
+  *{box-sizing:border-box}
+  html,body{margin:0;background:var(--page);color:var(--inkLight);
+    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Noto Sans",sans-serif;line-height:1.45}
+  a{color:#0b5bd3;text-decoration:underline} a:hover{text-decoration:none}
+  .layout{display:grid;grid-template-columns:290px 1fr;min-height:100vh}
+  aside{position:sticky;top:0;height:100vh;padding:16px;border-right:1px solid var(--line);
+    background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent 55%);
+    backdrop-filter: blur(8px) saturate(120%); color:var(--ink); background-color:var(--bg);}
+  .brand{display:flex;align-items:center;gap:2px;margin-bottom:6px;justify-content:center}
+  .brand img{width:254px;height:94px;}
+  .spy{list-style:none;padding:0;margin:12px 0;max-height:calc(100vh - 210px);overflow:auto}
+  .spy a{display:block;padding:10px 12px;border-radius:12px;color:var(--ink);opacity:.9}
+  .spy a.active,.spy a:hover{background:rgba(255,255,255,0.08);opacity:1}
+  .footnote{font-size:12px;color:var(--muted);margin-top:12px}
+aside .footnote{
+  text-align: center;
+  width: 100%;
+  display: block;
+}
+  .content{padding:18px 18px 80px;background:var(--page);color:var(--inkLight)}
+aside { text-align: center; }
+  header.app{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--lineLight)}
+  .toolbar{display:flex;gap:12px;align-items:center;padding:12px 16px}
+  .title{font-size:18px;font-weight:800;margin-right:auto;letter-spacing:.2px}
+  .search{flex:1;position:relative}
+  .search input{width:100%;padding:12px 42px 12px 14px;border-radius:14px;border:1px solid var(--lineLight);background:#fff;color:var(--inkLight);outline:none}
+  .search input:focus{box-shadow:var(--ring);border-color:transparent}
+  .search .icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);opacity:.7;font-size:13px;color:#647085}
+  .btn{border:1px solid var(--lineLight);background:var(--btnLight);color:var(--inkLight);padding:10px 14px;border-radius:12px;cursor:pointer}
+  .btn:hover{background:var(--btnLightOn)}
+  .filters{display:flex;flex-wrap:wrap;gap:8px;padding:10px 16px 16px}
+  .chip{padding:8px 12px;background:var(--chipLight);border:1px solid var(--lineLight);border-radius:999px;font-size:13px;cursor:pointer;user-select:none;color:var(--inkLight)}
+  .chip.active{background:var(--chipLightOn);border-color:var(--chipLightOn);color:var(--chipLightOnText)}
+  .section{scroll-margin-top:90px;margin-top:22px}
+  .section h2{font-size:20px;margin:18px 6px}
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
+
+  .card{grid-column:span 6;background:linear-gradient(180deg,var(--cardTop),var(--card));
+        border:1px solid var(--line);border-radius:var(--radius);padding:0;position:relative;
+        box-shadow:var(--shadow);overflow:hidden;color:var(--ink)}
+  .card a{color:var(--accent)}
+  .card .head{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03)}
+  .card h3{margin:0;font-size:16px}
+  .meta{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
+  .badge{padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,0.06)}
+  .body{padding:14px 16px}
+  .pill{position:absolute;top:10px;right:10px;font-size:12px;padding:4px 9px;border-radius:999px;background:#1b2552;border:1px solid var(--line)}
+  details{border-top:1px dashed rgba(255,255,255,0.12)}
+  details summary{cursor:pointer;list-style:none;user-select:none;font-weight:700;display:flex;align-items:center;gap:8px;padding:12px 0;color:#eef1ff}
+  details summary .chev{display:inline-block;transition:transform .25s ease;font-size:12px;opacity:.9}
+  details[open] summary .chev{transform:rotate(90deg)}
+  details .block{padding:0 0 12px 22px;color:#ecf0ff}
+  .row{padding:8px 0;border-top:1px dashed rgba(255,255,255,0.12)}
+  .row h4{margin:6px 0 4px;font-size:12px;letter-spacing:.03em;text-transform:uppercase;color:var(--muted)}
+  .row div{font-size:14px}
+  .empty{padding:20px;color:#647085;font-size:14px}
+  .hr{height:1px;background:#e9edf5;margin:24px 0}
+  .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6b758a;margin:2px 6px}
+  .hero{background:transparent}
+  .intro{background:#f7f9fe;border:1px solid var(--lineLight);border-radius:var(--radius);padding:18px;margin:8px 0 16px;color:var(--inkLight)}
+  .intro p{margin:8px 0}
+  .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:12px;background:#eef2fa;border:1px solid var(--lineLight);border-radius:6px;padding:2px 6px;color:#334}
+  .top{position:fixed;right:16px;bottom:16px;padding:10px 12px;border-radius:14px;background:var(--btnLight);border:1px solid var(--lineLight);cursor:pointer;display:none;color:var(--inkLight)}
+  @media (max-width:1100px){.layout{grid-template-columns:1fr}aside{position:static;height:auto}.spy{max-height:none}}
+  @media (max-width:860px){.card{grid-column:span 12}}
+/* --- Glass tokens (optional) --- */
+:root{
+  --glassDarkA: rgba(16,22,45,.55);     /* sidebar fill */
+  --glassDarkB: rgba(16,22,45,.35);     /* sidebar gradient tail */
+  --glassLine: rgba(255,255,255,.10);   /* subtle light border on dark glass */
+  --glassLight: rgba(255,255,255,.45);  /* search fill */
+  --glassLightLine: rgba(255,255,255,.60);
+}
+
+
+/* --- Glass tokens (keep) --- */
+:root{
+  --glassDarkA: rgba(14,20,40,.55);
+  --glassDarkB: rgba(14,20,40,.32);
+  --glassLine: rgba(255,255,255,.18);
+  --glassLight: rgba(255,255,255,.28);
+  --glassLightLine: rgba(255,255,255,.45);
+}
+
+
+
+
+
+
+
+
+/* --- Animated glassy sidebar (reliable movement) --- */
+.layout > aside{
+  position: sticky; /* keep your sticky */
+  overflow: hidden; /* hide overflow of glow layers */
+  background: rgba(11,20,48,0.90); /* deep navy base */
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
+  border-right: 1px solid rgba(255,255,255,.08);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 12px 28px rgba(0,0,0,.25);
+  isolation: isolate; /* make sure z-index works predictably */
+}
+
+/* Layer 1: slow rotating colour wash (blue → purple), softened */
+.layout > aside::before{
+  content:"";
+  position:absolute; inset:-40%;           /* oversize canvas to avoid edges */
+  background:
+    conic-gradient(
+      from 0deg,
+      rgba(0,120,255,0.22) 0deg,           /* blue */
+      rgba(180,0,200,0.22) 140deg,         /* purple */
+      rgba(40,60,140,0.20) 220deg,         /* navy tint */
+      rgba(0,120,255,0.22) 360deg
+    );
+  mix-blend-mode: screen;
+  filter: blur(26px);
+  opacity: 0.75;
+  transform-origin: 50% 50%;
+  animation: sidebarSpin 80s linear infinite;
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Layer 2: a gentle blue glow that drifts diagonally */
+.layout > aside::after{
+  content:"";
+  position:absolute; width:200%; height:200%;
+  left:-60%; top:-55%;
+  background: radial-gradient(circle at 50% 50%,
+              rgba(0,120,255,0.18), transparent 60%);
+  mix-blend-mode: screen;
+  filter: blur(14px);
+  opacity: 0.8;
+  animation: sidebarDrift 65s ease-in-out infinite alternate;
+  z-index: 0;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Keep your real content above the glow layers */
+.layout > aside .brand,
+.layout > aside .spy,
+.layout > aside .footnote{
+  position: relative;
+  z-index: 1;
+}
+
+/* Animations */
+@keyframes sidebarSpin{
+  from { transform: rotate(0deg) scale(1.02); }
+  to   { transform: rotate(360deg) scale(1.02); }
+}
+@keyframes sidebarDrift{
+  0%   { transform: translate(0%, 0%) scale(1); }
+  50%  { transform: translate(6%, 4%) scale(1.04); }
+  100% { transform: translate(-4%, -5%) scale(0.98); }
+}
+
+/* Optional: make it easier to see briefly, then slow it down */
+@media (prefers-reduced-motion: reduce){
+  .layout > aside::before,
+  .layout > aside::after{ animation: none; }
+}
+
+
+
+
+
+/* === Readability fixes (cards) === */
+
+/* darker, crisper header and divider so the meta line reads again */
+.card .head{
+  background:linear-gradient(180deg, rgba(255,255,255,.24), rgba(255,255,255,0));
+  border-bottom:1px solid rgba(17,34,68,.16); /* visible on glass */
+}
+
+/* slightly denser glass + darker ink on the card */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.10));
+  -webkit-backdrop-filter: blur(10px) saturate(140%);
+  backdrop-filter: blur(10px) saturate(140%);
+  border:1px solid rgba(255,255,255,.36);
+  color:#17233d;
+}
+
+/* meta row + badges with proper contrast */
+.meta{ color:#3a4763; }
+.badge{
+  background:rgba(255,255,255,.55);
+  border-color:rgba(17,34,68,.20);
+  color:#17233d;
+}
+
+/* price pill (Free/££) – make it pop again */
+.pill{
+  background:linear-gradient(180deg,#1b2550,#0f1a3d);
+  color:#fff;
+  border-color:rgba(255,255,255,.40);
+  box-shadow:0 2px 8px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.25);
+}
+
+/* links readable on the lighter card */
+.card a{ color:#0b5bd3; }
+
+/* details content ink */
+details summary{ color:#17233d; }
+details .block{ color:#24304d; }
+
+/* --- Fix stray brace: remove the lone "}" above the card fixes --- */
+
+
+/* --- Frosted header + glassy search --- */
+header.app{
+  background: rgba(255,255,255,.18);
+  -webkit-backdrop-filter: blur(14px) saturate(140%);
+  backdrop-filter: blur(14px) saturate(140%);
+  border-bottom: 1px solid var(--glassLightLine);
+}
+
+.search input{
+  background: var(--glassLight);
+  border: 1px solid var(--glassLightLine);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  backdrop-filter: blur(10px) saturate(150%);
+  color: #132;
+  box-shadow: 0 8px 22px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.55);
+}
+.search input:focus{
+  box-shadow: var(--ring), 0 8px 22px rgba(0,0,0,.12);
+  border-color: transparent;
+}
+.search input::placeholder{ color: rgba(19,34,50,.7); }
+.search .icon{ color:#4b5872; opacity:.9; }
+/* — Softer card shadow — */
+.card{
+  box-shadow: 0 8px 20px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+/* — Make the dashed separators clearly visible again — */
+.card .head{
+  border-bottom: 1px dashed rgba(255,255,255,.35);
+}
+
+details{
+  border-top: 1px dashed rgba(255,255,255,.30);
+}
+
+.card .row{
+  border-top: 1px dashed rgba(255,255,255,.30);
+}
+
+/* optional: a touch more contrast when hovering the summary rows */
+details summary:hover{ color:#fff; opacity:.95 }
+
+
+
+/* Smooth lift on hover */
+.card{
+  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+  will-change: transform;
+}
+.card:hover{
+  transform: translateY(-4px);                 /* the small jump */
+  box-shadow: 0 12px 26px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.50);
+}
+/* Respect reduced-motion */
+@media (prefers-reduced-motion: reduce){
+  .card{ transition:none }
+  .card:hover{ transform:none }
+}
+
+
+
+:root{
+  --dashBlue: rgba(35, 27, 31, 0.29);   /* light blue for dashed lines */
+}
+
+/* Apply to the three separators */
+.card .head{ border-bottom: 1px dashed var(--dashBlue); }
+details{ border-top: 1px dashed var(--dashBlue); }
+.card .row{ border-top: 1px dashed var(--dashBlue); }
+
+details summary:hover{ color:#0b5bd3; opacity:1; }
+
+
+
+/* === NHS Blue headings === */
+:root{
+  --nhsBlue: #005EB8;      /* NHS Blue */
+  --nhsBlueDark: #003087;  /* Optional darker shade */
+  -- Black: #000000
+}
+
+/* Section titles (IT & Technical, Soft Skills, Apprenticeships, etc.) */
+.section h2{
+  color: var(--nhsBlue);
+}
+
+/* Course titles inside cards */
+.card .head h3{
+  color: var(--nhsBlue);
+}
+
+
+details summary:hover{
+  color: var(--nhsBlue);
+  opacity: 1;
+}
+
+
+/* === Slight size increase for headings (responsive) === */
+:root{
+  --h2-size: clamp(24px, 2vw + 12px, 32px);  /* section titles */
+  --h3-size: clamp(18px, 1vw + 14px, 22px);  /* course titles */
+  --kicker-size: 13px;                        /* small label above h2 */
+}
+
+/* Section titles: e.g., IT, Soft Skills, Apprenticeships */
+.section h2{
+  font-size: var(--h2-size);
+  line-height: 1.2;
+  margin: 20px 6px 10px; /* a touch more breathing room */
+}
+
+/* Course titles inside cards */
+.card .head h3{
+  font-size: var(--h3-size);
+  line-height: 1.25;
+}
+
+/* Optional: make the small kicker label slightly bigger, too */
+.kicker{
+  font-size: var(--kicker-size);
+  letter-spacing: .14em;
+}
+
+/* Optional: a tad more vertical rhythm between sections */
+.section{
+  margin-top: 26px; /* was ~22px */
+}
+
+
+/* --- Section & card spacing (single source of truth) --- */
+.section{
+  margin-top: 58px;              /* space above each section */
+}
+
+.section > h2{
+  margin: 0 6px 54px;            /* space under the title (overrides earlier 18px 6px) */
+}
+
+.section > .grid{
+  margin-top: 12px;              /* space before the first card row */
+}
+
+.grid{
+  gap: 20px;                      /* a touch more space between cards */
+}
+
+
+
+
+
+</style>
+</head>
+<body>
+<div class="layout">
+  <aside>
+    <div class="brand">
+      <img alt="Essentia Academy" src="https://raw.githubusercontent.com/EsseAcadem/hub/b8b8d5c795c59bb0c57d9e5347b31928912cba05/White_dt%26i_Academy.png
+"/>
+    </div>
+    <ul class="spy" id="spy">
+      <li><a href="#welcome" class="active">Welcome</a></li>
+      <li><a href="#booking">How booking works</a></li>
+      <li><a href="#it-tech">IT &amp; Technical</a></li>
+      <li><a href="#soft-skills">Soft Skills</a></li>
+      <li><a href="#apprenticeships">Apprenticeships</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="footnote">
+      October 2025 Edition<br>
+      By Rafael Battaglini
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="app">
+      <div class="toolbar">
+        <div class="title">DT&amp;I Training Brochure</div>
+        <div class="search">
+          <input id="q" placeholder="Search courses, topics, delivery, cost…">
+          <span class="icon">⌘K</span>
+        </div>
+        <button class="btn" id="printBtn" title="Print or save as PDF">Print</button>
+      </div>
+      <div class="filters" id="filters"></div>
+    </header>
+
+    <section id="welcome" class="section hero">
+      <p class="kicker">Welcome</p>
+      <h2>A word from DT&amp;I</h2>
+      <div class="intro">
+        <p>Welcome to the latest DT&amp;I Training Brochure. Explore technical, soft skills and apprenticeship options to support your development and career progression.</p>
+     
+      </div>
+    </section>
+
+    <section id="booking" class="section">
+      <p class="kicker">Process</p>
+      <h2>How booking works</h2>
+      <div class="intro">
+        <ul>
+          <li><strong>Free courses</strong> are delivered by the Essentia Academy or part of the Trust offer. Ask your manager, then email the contact on each card.</li>
+          <li><strong>Paid courses</strong> require a training request form, manager support, and committee approval (GSTT windows: end of June &amp; end of November; review in January).</li>
+          <li><strong>Apprenticeships</strong> are levy-funded; require role fit and manager approval; Trust form starts enrolment.</li>
+        </ul>
+      </div>
+      <div class="hr"></div>
+    </section>
+
+    <section id="it-tech" class="section">
+      <p class="kicker">Catalogue</p>
+      <h2>IT, Project Management &amp; Technical</h2>
+      <div class="grid" id="grid-it"></div>
+    </section>
+
+    <section id="soft-skills" class="section">
+      <h2>Soft Skills</h2>
+      <div class="grid" id="grid-soft"></div>
+    </section>
+
+<section id="apprenticeships" class="section">
+  <h2>Apprenticeships</h2>
+  <div class="intro">
+    <p>Apprenticeships are funded via the Apprenticeship Levy and have no cost to the learner. Time commitment and manager approval are required.</p>
+  </div>
+  <div class="grid" id="grid-apprenticeships"></div>
+</section>
+
+    <section id="contact" class="section">
+      <h2>Contact</h2>
+      <div class="intro">
+        <p>E-mail: <a href="mailto:gstt.DTIAcademy@nhs.net">gstt.DTIAcademy@nhs.net</a></p>
+        <p>College of Healthcare Learning Hub: <em>internal access required</em></p>
+       
+      </div>
+    </section>
+  </main>
+</div>
+
+<button class="top" id="topBtn" aria-label="Back to top">↑</button>
+
+<script>
+// Full dataset from your working example + cleaned where needed
+const DATA = [
+  // ---------- IT & Technical ----------
+  {
+    title: "EPIC Requirements Gathering Course",
+    section: "it",
+    tags: ["Epic","Requirements","Free","Virtual"],
+    isForMe: "Open to all ITCS staff.",
+    involve: "Brief introduction to requirements gathering.",
+    learn: [
+      "Gathering requirements, scoping and budgeting time",
+      "Build, naming conventions and build strategies",
+      "Working on integrated build with other teams",
+      "Content management and migration",
+      "Testing; training and communication",
+      "Releasing and restarting the cycle"
+    ],
+    delivery: "Virtual, twice per year (March & September). Recording available for new starters or those unable to attend.",
+    duration: "2.5 hours",
+    cost: "Free",
+    how: "E-mail Dylan.Taylor@nhs.net for the joining link."
+  },
+  {
+    title: "ITCS SQL Training",
+    section: "it",
+    tags: ["SQL","Epic","Data","Free","Self-study"],
+    isForMe: "ITCS staff who will use SQL to support Epic and other systems. No prior programming experience required.",
+    involve: "Supported self-study with seminars and optional study halls; manager-agreed study time (20–40 hours).",
+    learn: [
+      "Baseline SQL skills for Epic and non‑Epic data warehouses",
+      "Orientation to Caboodle & Clarity and data discovery",
+      "Responsible use of shared DW resources"
+    ],
+    delivery: "Virtual — kickoff, seminars, optional study halls; once or twice per year depending on demand.",
+    duration: "1h kickoff, 3h seminars, 4h optional halls, 20–40h self‑study & assessments",
+    cost: "Free",
+    how: "Agree study with your manager, then e‑mail James.Gill5@nhs.net."
+  },
+  {
+    title: "ITCS Server & Application Troubleshooting",
+    section: "it",
+    tags: ["Servers","Non‑Epic","Troubleshooting","Free","Virtual"],
+    isForMe: "ITCS analysts supporting non‑Epic applications who want hands‑on practice in a test environment.",
+    involve: "Overview of common issues, tools and approach; hands‑on breakout on a test server; Q&A.",
+    learn: [
+      "Common server/application issues",
+      "Tools, commands and techniques for troubleshooting",
+      "Monitoring and alerting basics",
+      "Confidence through practical investigation"
+    ],
+    delivery: "Online on scheduled dates (e.g. 18 Jun, 10 Sep, 19 Nov 2025).",
+    duration: "3 hours",
+    cost: "Free",
+    how: "E‑mail Jonathan.Bassett@nhs.net."
+  },
+  {
+    title: "Contract Management Capability Programme (CMCP) — Foundation",
+    section: "it",
+    tags: ["Contracts","Commercial","Free","Online"],
+    isForMe: "Staff needing contract management skills.",
+    involve: "Six interactive modules aligned to the Contract Management Professional Standards plus a Foundation assessment.",
+    learn: [
+      "Design & ongoing development",
+      "Procurement & mobilisation",
+      "Managing contract delivery",
+      "Change control",
+      "Stakeholder engagement",
+      "Risk management"
+    ],
+    delivery: "Self‑paced online via Government Commercial College; accreditation on completion.",
+    duration: "Approx. 4 hours",
+    cost: "Free",
+    how: "Register on the Government Commercial College website."
+  },
+  {
+    title: "NCSC Cyber Security Training",
+    section: "it",
+    tags: ["Cyber","Security","Free","Online"],
+    isForMe: "GSTT IT staff seeking core cyber awareness and safe online practice.",
+    involve: "Self‑paced modules exploring typical scenarios and actions.",
+    learn: [
+      "Defending against phishing",
+      "Creating strong passwords",
+      "Securing your devices",
+      "Reporting incidents"
+    ],
+    delivery: "Online modules via NCSC.",
+    duration: "TBC",
+    cost: "Free",
+    how: "Register via the NCSC training page."
+  },
+  {
+    title: "Epic Proficiency — Self‑Study",
+    section: "it",
+    tags: ["Epic","Self‑study","Accreditation","Free"],
+    isForMe: "ITCS application colleagues aiming for Proficient‑Self Study status in another Epic application.",
+    involve: "Use Epic Training Home to complete the selected track and pass the exam.",
+    learn: ["Syllabus depends on the chosen application/track."],
+    delivery: "Self‑study at own pace; exam date agreed with Manager.",
+    duration: "Self‑guided",
+    cost: "Free",
+    how: "Discuss with your Manager; Epic Training team grants access via UserWeb."
+  },
+  {
+    title: "Epic Application Forums (Bristol)",
+    section: "it",
+    tags: ["Epic","In‑person","Autumn","Free"],
+    isForMe: "ITCS application colleagues for the applications hosted that year in Bristol.",
+    involve: "Day‑long sessions with UK Epic customers and developers; knowledge sharing and problem‑solving.",
+    learn: [
+      "Latest Epic features and roadmap",
+      "Collaborative solutions to technical challenges",
+      "Peer knowledge exchange across UK partners"
+    ],
+    delivery: "In‑person at Epic’s Bristol office every Autumn (limited places per team; train travel covered by ITCS).",
+    duration: "1 day",
+    cost: "Free",
+    how: "Register interest with your Application Manager when dates are announced."
+  },
+  {
+    title: "People Manager Programme (GSTT)",
+    section: "it",
+    tags: ["Leadership","Managers","Free","COH"],
+    isForMe: "GSTT staff who manage people (PDR responsibility). Bronze certification required by Sept 2025.",
+    involve: "Purpose‑built programme to equip all managers; focuses on just and learning culture, EDI and positive behaviours.",
+    learn: [
+      "Managing your team (core)",
+      "Inclusive management (core)",
+      "Performance management (core)",
+      "Compassionate leadership (core)",
+      "Potential, safe & healthy, flexible teams (additional modules)"
+    ],
+    delivery: "Per module: 90‑min e‑learning → toolkit → 2–2.5h experiential workshop.",
+    duration: "4–12 hours total (module dependent)",
+    cost: "Free",
+    how: "Book via COH; if access missing and you’re a manager, e‑mail gstt.Learndev@nhs.net"
+  },
+  {
+    title: "IT Training — Trust Offer",
+    section: "it",
+    tags: ["Excel","Epic","Accessibility","Free","COH"],
+    isForMe: "GSTT staff wanting Microsoft skills, Epic refreshers, or accessibility support.",
+    involve: "College of Healthcare hub: live webinars, resource libraries, and Epic 'Thrive' sessions.",
+    learn: [
+      "Excel basics and data analysis",
+      "Pivot tables (build and interpret)",
+      "Epic personalisation, Smart Tools, Dragon VR",
+      "IT accessibility support"
+    ],
+    delivery: "COH enrolment; varying formats and dates.",
+    duration: "Varies",
+    cost: "Free",
+    how: "Enrol via COH; accessibility via ITCSAccessibility@nhs.net"
+  },
+  {
+    title: "Microsoft Project — Masterclass",
+    section: "it",
+    tags: ["Project","Paid","Provider"],
+    isForMe: "Individuals wanting to learn or polish skills in Microsoft Project to plan and manage projects effectively.",
+    involve: "In‑depth views, collaboration and resource management; scheduling and calendar assignment.",
+    learn: [
+      "Use tools in MS Project to create/manage projects",
+      "PM methodologies with Project",
+      "Resource management and levelling",
+      "Realistic schedules and display views"
+    ],
+    delivery: "Self‑paced, virtual instructor‑led, or classroom (Knowledge Academy).",
+    duration: "4 hours",
+    cost: "£750–£895",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Microsoft Visio — Essentials",
+    section: "it",
+    tags: ["Visio","Diagrams","Paid","Provider"],
+    isForMe: "Staff creating 2D/3D visuals, flowcharts, Gantt, org charts, network or floor plans.",
+    involve: "Visio Drawing/Template/Stencil/Web Drawing; shape data and custom shapes.",
+    learn: [
+      "Layers and layer properties",
+      "Assigning shapes to layers",
+      "Advanced diagrams (flowcharts, Gantt)",
+      "Diagramming with shape data and custom shapes"
+    ],
+    delivery: "Self‑paced, virtual instructor‑led, or classroom (Knowledge Academy).",
+    duration: "1 day",
+    cost: "£895",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Introduction to Project Management",
+    section: "it",
+    tags: ["Projects","Paid","Virtual"],
+    isForMe: "New PMs, project support, or anyone about to be involved in projects.",
+    involve: "Half‑day PM overview: mechanisms, terminology, tools and techniques for structured delivery.",
+    learn: [
+      "Costing, planning and risk management",
+      "Benefits and monitoring/controlling",
+      "Teams and closing projects",
+      "Project logs and core tools"
+    ],
+    delivery: "Virtual (Microsoft Teams).",
+    duration: "1 day",
+    cost: "£995",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Agile Project Management — Foundation & Practitioner",
+    section: "it",
+    tags: ["Agile","Paid","Provider"],
+    isForMe: "Anyone wanting an alternative to traditional PM and to organise Agile projects.",
+    involve: "Four‑to‑five day course on Agile principles, MoSCoW, timeboxing, user stories and workshops.",
+    learn: [
+      "Agile approaches and which to use",
+      "8 principles; communication & collaboration",
+      "Roles, lifecycle and products",
+      "MoSCoW prioritisation, timeboxing, user stories, facilitated workshops"
+    ],
+    delivery: "Self‑paced, virtual instructor‑led, or classroom (Knowledge Academy).",
+    duration: "5 days (3F + 2P)",
+    cost: "£2,495",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "PRINCE2 — Foundation & Practitioner",
+    section: "it",
+    tags: ["PRINCE2","Paid","Provider"],
+    isForMe: "Aspiring project managers seeking a widely recognised UK qualification.",
+    involve: "Terminology, seven themes/processes/principles, practice mocks and online exam.",
+    learn: [
+      "Principles incl. business justification & tailoring",
+      "Processes from start‑up to closure",
+      "Roles & responsibilities; product focus"
+    ],
+    delivery: "Self‑paced or virtual instructor‑led; classroom option via Knowledge Academy.",
+    duration: "5 days (3F + 2P)",
+    cost: "£2,795",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Lean Six Sigma Certification",
+    section: "it",
+    tags: ["Lean","Six Sigma","Paid","Virtual"],
+    isForMe: "New/existing PMs and leaders; belt levels available incl. Yellow Belt and executive briefings.",
+    involve: "Lean waste removal + Six Sigma quality improvement using DMAIC and practical tools.",
+    learn: [
+      "Lean vs Six Sigma and key principles",
+      "Belts and roles",
+      "Customers, value and waste",
+      "DMAIC; Gemba; VOC/CTQs; Affinity and Kano"
+    ],
+    delivery: "Virtual (Microsoft Teams).",
+    duration: "5 days",
+    cost: "£2,495",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Project Management Professional (PMP)",
+    section: "it",
+    tags: ["PMP","Paid","Provider"],
+    isForMe: "Professionals seeking to demonstrate PM capability across people, process and business environment.",
+    involve: "Practice‑oriented programme tailored to your needs; leadership and value delivery focus.",
+    learn: [
+      "Conflict management; leading and building teams",
+      "Empowering stakeholders; removing blockers",
+      "Value delivery with urgency; effective communication",
+      "Benefits/value evaluation; adapting to external change"
+    ],
+    delivery: "Self‑paced / classroom / virtual instructor‑led.",
+    duration: "5 days",
+    cost: "£3,395",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Management of Risk (MoR) — Foundation & Practitioner",
+    section: "it",
+    tags: ["Risk","MoR","Paid","Provider"],
+    isForMe: "Anyone seeking structured risk identification, assessment and control techniques.",
+    involve: "Intensive focus on framework, principles and approaches; application to varied contexts.",
+    learn: [
+      "MoR concepts, definitions and framework",
+      "Principles and supporting mechanisms",
+      "Nine MoR approaches; stakeholders and communications",
+      "Embedding/reviewing MoR and common pitfalls"
+    ],
+    delivery: "Self‑paced / classroom / virtual instructor‑led.",
+    duration: "4 days (3F + 1P)",
+    cost: "£3,695",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Bid & Tender Training",
+    section: "it",
+    tags: ["Bids","Tendering","Paid","Virtual"],
+    isForMe: "Novice or experienced bid‑writers and anyone in the tendering process.",
+    involve: "Tools and process to improve win rates across the bid lifecycle.",
+    learn: [
+      "Bid basics, market sounding, PQQs & tenders",
+      "Bid/no‑bid decisions; alliances & partnerships",
+      "Understanding the competition; writing the bid",
+      "Monitoring, submission, evaluation and improvement"
+    ],
+    delivery: "Virtual (Microsoft Teams).",
+    duration: "1 day",
+    cost: "£995",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "EU GDPR — Foundation & Practitioner",
+    section: "it",
+    tags: ["GDPR","Paid","Provider"],
+    isForMe: "PMs, analysts, risk/compliance and InfoSec staff wanting GDPR depth.",
+    involve: "Foundation: legal basis, rights, DPIAs, breach response; Practitioner exam online.",
+    learn: [
+      "Terminology and article/recitals overview",
+      "DPA vs GDPR; controllers & processors",
+      "Lawful processing; DPIAs; DPO role",
+      "Breach reporting; ICO powers; fines"
+    ],
+    delivery: "Instructor‑led online or classroom; 60‑min MCQ exam online.",
+    duration: "4 days",
+    cost: "£2,295",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Business Analysis Practice",
+    section: "it",
+    tags: ["Business Analysis","Paid","Provider"],
+    isForMe: "Working BAs seeking enhanced practice; counts toward BCS International Diploma.",
+    involve: "Change analysis, value focus, collaboration and EA alignment.",
+    learn: [
+      "Strategic context; KPIs & CSFs",
+      "Investigative techniques; holistic views",
+      "BA lifecycle and framework activities",
+      "Models, gap analysis and IS/IT requirements"
+    ],
+    delivery: "Self‑paced / virtual instructor‑led / classroom.",
+    duration: "3 days",
+    cost: "£1,995",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "BCS International Diploma in Business Analysis",
+    section: "it",
+    tags: ["Business Analysis","Paid","Provider"],
+    isForMe: "IT and business professionals wanting a comprehensive BA qualification.",
+    involve: "Four core/optional/practitioner modules plus oral preparation; exam via BCS portal.",
+    learn: [
+      "BA Practice & Requirements (core)",
+      "Knowledge modules (e.g., Org Behaviour, Business Change, IS PM)",
+      "Practitioner modules (e.g., Modelling Processes, Benefits Management)"
+    ],
+    delivery: "Self‑paced / virtual instructor‑led / classroom; oral via BCS portal.",
+    duration: "10 days",
+    cost: "£3,995",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Certified Ethical Hacker (CEH)",
+    section: "it",
+    tags: ["Cyber","Security","Paid","Instructor"],
+    isForMe: "Security practitioners or learners wanting to understand attacker methods and defences.",
+    involve: "Ethical hacking methodologies, hands‑on labs; mindset of a penetration tester.",
+    learn: [
+      "Scanning & vulnerabilities; malware; DoS",
+      "Evasion, web/app/cloud/mobile security",
+      "Wireless, cryptography; IDS/firewall bypass",
+      "Web application security techniques"
+    ],
+    delivery: "Instructor‑led online or classroom (London/Ely).",
+    duration: "5 days",
+    cost: "£3,995",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "CRISC — Risk and Information Systems Control",
+    section: "it",
+    tags: ["Risk","Security","Paid","Provider"],
+    isForMe: "Those seeking to design, implement, monitor and report on IT risk controls.",
+    involve: "Governance, risk analysis & evaluation, response and control design/testing.",
+    learn: [
+      "Organisational & risk governance; ethics & legal",
+      "Risk assessment frameworks & BIA",
+      "Treatment options; exception & emerging risk",
+      "Control design/testing; monitoring & reporting"
+    ],
+    delivery: "Self‑paced / classroom / virtual instructor‑led.",
+    duration: "3 days",
+    cost: "£3,495",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "CompTIA CySA+",
+    section: "it",
+    tags: ["Security","CompTIA","Paid","Provider"],
+    isForMe: "Individuals wanting to apply behavioural analytics to identify and combat cyber threats.",
+    involve: "Threat intel, detection techniques, vuln management, controls, response and basic forensics.",
+    learn: [
+      "Use threat intelligence; perform vulnerability management",
+      "Apply security solutions and assurance concepts",
+      "Analyse & interpret data; improve controls",
+      "Incident response procedures; basic forensics"
+    ],
+    delivery: "Self‑paced or virtual instructor‑led.",
+    duration: "4 days",
+    cost: "£2,995",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Digital Transformation Certification",
+    section: "it",
+    tags: ["Digital","Change","Paid","Provider"],
+    isForMe: "Managers/consultants interested in organisational change and strategic digital objectives.",
+    involve: "Global certification covering platforms, AI, big data, decision digitisation and process transformation.",
+    learn: [
+      "Customer networks; platform business models",
+      "AI in business; big data at work",
+      "Decision digitisation & process transformation",
+      "Innovation and value proposition adaptation"
+    ],
+    delivery: "Self‑paced, virtual, classroom or onsite (Knowledge Academy).",
+    duration: "2 days",
+    cost: "£1,995",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "HPE NonStop Systems — Performance Analysis & Tuning",
+    section: "it",
+    tags: ["HPE","Performance","Paid","Provider"],
+    isForMe: "System managers, technical support or performance analysis roles using HPE NonStop.",
+    involve: "Capture/analyse performance data, interpret, tune and use tooling for system optimisation.",
+    learn: [
+      "Tuning steps & principles; response times",
+      "Measuring data; cache ratios; locating bottlenecks",
+      "PROCESS measures; server class parameters",
+      "Application performance factors; useful tools"
+    ],
+    delivery: "Self‑paced, virtual or classroom.",
+    duration: "5 days",
+    cost: "£2,999",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Other Technical Training (on request)",
+    section: "it",
+    tags: ["Provider","Catalogue","Paid"],
+    isForMe: "Staff needing specific technical courses (ITIL, COBIT, CISA, Azure, DevOps, SQL, etc.).",
+    involve: "Wide catalogue available from The Knowledge Academy.",
+    learn: ["Varies by course"],
+    delivery: "Self‑paced / virtual / classroom.",
+    duration: "Varies",
+    cost: "Varies",
+    how: "E‑mail gstt.DTIAcademy@nhs.net with your request."
+  },
+
+  // ---------- Soft Skills (Essentia Academy — free unless stated) ----------
+  {
+    title: "Agile Project Management (Introduction)",
+    section: "soft",
+    tags: ["Agile","Projects","Free","Teams"],
+    isForMe: "Staff who work on projects and want to enhance PM skills.",
+    involve: "Detailed introduction to Agile as an iterative delivery framework.",
+    learn: ["Agile framework","Project steps and stakeholder management","Implementation plan for current work projects"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Assertiveness Skills",
+    section: "soft",
+    tags: ["Communication","Confidence","Free","Teams"],
+    isForMe: "Anyone wanting to manage demanding situations and say ‘no’ confidently.",
+    involve: "Explore issues from non‑assertiveness and benefits of assertiveness in the workplace.",
+    learn: ["Assertive styles for different situations","Communication processes and body language","Confidence techniques"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Attention Management",
+    section: "soft",
+    tags: ["Productivity","Time","Free","Teams"],
+    isForMe: "Anyone wanting to focus attention and avoid time waste.",
+    involve: "Tools and techniques with practical exercises to build efficiency.",
+    learn: ["Goal setting & objectives","Prioritisation techniques","Influences on attention"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Business Case Writing",
+    section: "soft",
+    tags: ["Writing","Reports","Free","Teams"],
+    isForMe: "Staff writing reports or business cases.",
+    involve: "Client‑focused approach from research through to post‑submission evaluation.",
+    learn: ["Report essentials","Research approach","Top tips for cases","Post‑submission & evaluation"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Coaching & Communication",
+    section: "soft",
+    tags: ["Coaching","Communication","Free","Teams"],
+    isForMe: "Anyone wanting better communication and coaching skills.",
+    involve: "Understand styles; practise coaching with peers.",
+    learn: ["De Bono hats; self‑talk","Active listening; GROW model","Coaching vs mentoring"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "4 hours",
+    cost: "Free",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Compassionate Leadership",
+    section: "soft",
+    tags: ["Leadership","Inclusion","Free","Teams"],
+    isForMe: "Leaders with teams who want to balance care with performance.",
+    involve: "Human‑centred leadership that builds safe, high‑performing teams.",
+    learn: ["Shared purpose & vision","Valuing difference; inclusion","Clear roles; strong teams"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Confidence Building",
+    section: "soft",
+    tags: ["Confidence","Mindset","Free","Teams"],
+    isForMe: "All staff.",
+    involve: "Techniques for confidence in common scenarios.",
+    learn: ["Positive self‑talk","Mindset shifts","Practical tips for interviews/presenting"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "1 hour",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Cross‑Cultural Communication",
+    section: "soft",
+    tags: ["Communication","Culture","Free","Teams"],
+    isForMe: "Anyone working with global colleagues, clients or stakeholders.",
+    involve: "Overcome cultural barriers; build meaningful relationships.",
+    learn: ["Cultural styles & diversity","Virtual team communication","Goal‑setting in diverse teams"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Customer Service",
+    section: "soft",
+    tags: ["Customer","Service","Free","Teams"],
+    isForMe: "All staff, especially patient/customer‑facing roles.",
+    involve: "Polite assertiveness, dealing with difficulty and meeting expectations.",
+    learn: ["Communication barriers & vehicles","Handling difficult situations","NLP basics; effective body language"],
+    delivery: "Quarterly via Microsoft Teams (face‑to‑face available for teams).",
+    duration: "3 hours",
+    cost: "Free",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "CV Writing & Interview Skills",
+    section: "soft",
+    tags: ["CV","Interview","Free","Teams"],
+    isForMe: "Anyone preparing applications or interviews.",
+    involve: "From strong CV/application to STAR answers and post‑interview steps.",
+    learn: ["CV fundamentals & stand‑out tips","Personal statement structure","STAR method; prep & follow‑up"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "90 minutes",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Delegation Training",
+    section: "soft",
+    tags: ["Delegation","Managers","Free","Teams"],
+    isForMe: "Team leaders/managers improving focus by delegating effectively.",
+    involve: "Tools to assign, communicate and monitor delegated tasks.",
+    learn: ["Principles & benefits","Task selection & communication","Action plans & progress monitoring"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Email Management",
+    section: "soft",
+    tags: ["Outlook","Productivity","Free","Teams"],
+    isForMe: "Staff wanting efficient inbox habits.",
+    involve: "Etiquette and features to prioritise and automate.",
+    learn: ["Prioritising; tasks & flags","Rules & folders; alerts","Delayed delivery"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Leadership Skills (Provider)",
+    section: "soft",
+    tags: ["Leadership","Paid","Provider"],
+    isForMe: "Individuals seeking core leadership principles and styles.",
+    involve: "Adapting to change, delegation, transparency and positive mindset.",
+    learn: ["Positivity, creativity, feedback, motivation","Styles: autocratic, authoritative, pacesetting, democratic, coaching, affiliative, laissez‑faire"],
+    delivery: "Self‑paced / virtual / classroom.",
+    duration: "1 day",
+    cost: "£895",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "LinkedIn Training",
+    section: "soft",
+    tags: ["LinkedIn","Profile","Free","Teams"],
+    isForMe: "Anyone wanting to improve LinkedIn use (profile not required).",
+    involve: "Overview of core features and networking; live profile demo.",
+    learn: ["Do's and don'ts","Main functions","Profile walkthrough"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "45 minutes",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Manager vs Leader",
+    section: "soft",
+    tags: ["Leadership","Managers","Free","Teams"],
+    isForMe: "Managers, team leaders and supervisors (or aspiring).",
+    involve: "Skills that distinguish leading from managing; adapting to styles.",
+    learn: ["Models & theories; situational leadership","Emotional intelligence","Johari window; learning styles"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "4 hours",
+    cost: "Free",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Managing Organisational Change Effectively",
+    section: "soft",
+    tags: ["Change","Management","Paid","Provider"],
+    isForMe: "Managers who lead people through change.",
+    involve: "People‑centred strategies; dealing with resistance; embedding habits.",
+    learn: ["Why change; its effects","Leading people through change","Comms, prioritising, support & evaluation"],
+    delivery: "Self‑paced / classroom / virtual.",
+    duration: "3 hours",
+    cost: "£400",
+    how: "E‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Motivation & Goal‑setting",
+    section: "soft",
+    tags: ["Motivation","Goals","Free","Teams"],
+    isForMe: "Anyone seeking practical motivation and goal tools.",
+    involve: "Systematic techniques for accuracy, motivation and progress.",
+    learn: ["Goal theory; prioritising","Maintaining motivation","Maslow; tools for tracking progress"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Negotiation Skills",
+    section: "soft",
+    tags: ["Negotiation","Influence","Paid","Teams"],
+    isForMe: "Anyone wishing to improve negotiation outcomes.",
+    involve: "Confidence, collaboration and agreement‑building techniques.",
+    learn: ["Stages & tools","Relationships & objectives","Conflict solving & difficult situations"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "£400",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "MPD Effective Conversations",
+    section: "soft",
+    tags: ["MPD","Performance","Free","Teams"],
+    isForMe: "Reviewers who know the MPD process and want conversation practice.",
+    involve: "Feedback models; practise six common MPD scenarios.",
+    learn: ["Ratings re‑cap","Model practice","Scenario‑based conversations"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "90 minutes",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Powerful Presence & Presentation Skills",
+    section: "soft",
+    tags: ["Presentation","Training","Free","Teams"],
+    isForMe: "All staff wanting presence and impact.",
+    involve: "Understand and grow your presence; present with impact.",
+    learn: ["Create the right presence","Deliver training effectively","Present with impact"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Prioritisation Skills",
+    section: "soft",
+    tags: ["Prioritisation","Planning","Free","Teams"],
+    isForMe: "Anyone wanting to plan and prioritise better.",
+    involve: "Core tools and techniques for prioritising your workload.",
+    learn: ["How to prioritise","Tasks & to‑do schedules","Impact of poor prioritising on stress"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Recruitment & Selection",
+    section: "soft",
+    tags: ["Recruitment","Managers","Free","Teams"],
+    isForMe: "Line managers responsible for recruitment.",
+    involve: "Practical skills for fair and effective recruitment.",
+    learn: ["Trust process; unconscious bias","Interview process & assessments","Ways to improve current practice"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "2 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Stakeholder Management",
+    section: "soft",
+    tags: ["Stakeholders","Influence","Free","Teams"],
+    isForMe: "Staff who deal with varied stakeholders.",
+    involve: "Mapping needs and managing via communication, influence and negotiation.",
+    learn: ["Identify stakeholders & needs","Stakeholder mapping","Comms, influence & negotiation"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "90 minutes",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+  },
+  {
+    title: "Time Management",
+    section: "soft",
+    tags: ["Time","Planning","Free","Teams"],
+    isForMe: "Anyone who must prioritise and respond to changing demands.",
+    involve: "Practical tools to plan, schedule and regain control over workload.",
+    learn: ["Objectives & evaluation","Scheduling & routines","Priority tasks & plans"],
+    delivery: "Quarterly via Microsoft Teams.",
+    duration: "3 hours",
+    cost: "Free",
+    how: "Book via COH or e‑mail gstt.DTIAcademy@nhs.net"
+},
+
+  // ---------- Apprenticeships (levy-funded, no learner cost) ----------
+{
+  title: "Cyber Security Technician — Level 3",
+  section: "apprenticeship",
+  tags: ["Cyber","Security","Levy","Apprenticeship","Free"],
+  isForMe: "Individuals starting a cyber security career who want core information security and risk skills.",
+  involve: "Implements technical, procedural and physical controls to monitor, detect and respond to cyber threats, maintaining confidentiality, integrity and availability.",
+  learn: [
+    "Apply procedures/controls to secure the organisation",
+    "Promote a positive security culture; awareness support",
+    "Process helpdesk requests securely and compliantly",
+    "Install & maintain security controls",
+    "Monitor, report and escalate incidents",
+    "Administer crypto and certificate management"
+  ],
+  delivery: "One college day per week (remote) with portfolios, knowledge tests and professional discussion.",
+  duration: "18 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Cyber Security Technician). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Cyber Security Technologist — Level 4",
+  section: "apprenticeship",
+  tags: ["Cyber","Security","Levy","Apprenticeship","Free"],
+  isForMe: "People who will discover vulnerabilities, design security controls and write scripts to improve cyber defence.",
+  involve: "Implements controls to monitor, detect and respond to threats; informs policy and security culture.",
+  learn: [
+    "Networking & network security",
+    "Cyber security fundamentals; threat, vulnerability & risk",
+    "OS security; cryptography; access control",
+    "InfoSec frameworks & policies; secure coding basics"
+  ],
+  delivery: "Blended residential + online learning with SME support and full e-learning access.",
+  duration: "24 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Cyber Security Technologist). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Cyber Security Technical Professional (Integrated Degree) — Level 6",
+  section: "apprenticeship",
+  tags: ["Cyber","Security","Degree","Levy","Apprenticeship","Free"],
+  isForMe: "Those leading teams to assess/manage cyber risk, design secure solutions and respond to incidents.",
+  involve: "Work-based degree covering cyber issues, tech solutions and applied learning with coaching.",
+  learn: [
+    "Computer systems & HCI security",
+    "Software development; computer & network security",
+    "Data science; ethical hacking",
+    "Digital forensics & incident handling"
+  ],
+  delivery: "Blended digital learning + day-block workshops and regular coaching.",
+  duration: "48 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Cyber Security Technical Professional). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Data Analyst — Level 4",
+  section: "apprenticeship",
+  tags: ["Data","Analytics","Power BI","SQL","Levy","Apprenticeship","Free"],
+  isForMe: "Staff with solid data skills wanting advanced techniques for analysis and prediction.",
+  involve: "Nationwide programme on latest analytics approaches to improve how data is collected, organised and used.",
+  learn: [
+    "Business value from analytics",
+    "Dashboards & ETL (Power BI)",
+    "Visualisation (Tableau)",
+    "Data architecture & governance",
+    "Intro databases with SQL",
+    "Statistics & modelling with R",
+    "Python for analytics; big data parsing",
+    "Portfolio clinic"
+  ],
+  delivery: "Remote delivery (Teams/Zoom) with regular 1-to-1 coaching and quarterly reviews.",
+  duration: "24 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Data Analyst). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Data Scientist (Integrated Degree) — Level 6",
+  section: "apprenticeship",
+  tags: ["Data","Science","AI/ML","Degree","Levy","Apprenticeship","Free"],
+  isForMe: "Early-career data scientists or staff stepping into a DS role for the first time.",
+  involve: "Work-based degree training across statistics, modelling, algorithms and programming plus core business skills.",
+  learn: [
+    "Software development; maths & stats",
+    "Databases; responsible decision-making",
+    "Visualisation; AI & machine learning",
+    "Teamworking; big data & cloud project"
+  ],
+  delivery: "Blended: remote online learning + face-to-face block workshops.",
+  duration: "36 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Data Scientist). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Operational Research Specialist — Level 7",
+  section: "apprenticeship",
+  tags: ["Operational Research","Analytics","Levy","Apprenticeship","Free"],
+  isForMe: "People who enjoy using analysis to solve complex, non-routine problems and guide strategy.",
+  involve: "Covers data availability, protection, manipulation, research methods and quality assurance.",
+  learn: [
+    "Problem structuring; stakeholders & assumptions",
+    "Optimisation; modelling & simulation",
+    "Tools/methods & data analysis",
+    "Reflective practice; leadership in OR",
+    "Quality assurance of analytical products"
+  ],
+  delivery: "Blended: remote + face-to-face blocks.",
+  duration: "24 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Operational Research Specialist). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Information Communications Technician — Level 3",
+  section: "apprenticeship",
+  tags: ["Service Desk","Support","Networks","Cloud","Levy","Apprenticeship","Free"],
+  isForMe: "Customer-facing support roles resolving day-to-day technical and application problems.",
+  involve: "Quality IT support; troubleshooting; diagnose & communicate solutions; maintain availability.",
+  learn: [
+    "Security principles; access & encryption",
+    "Technical documentation basics",
+    "DevOps insight (Chef, Docker, Git)",
+    "Cloud fundamentals (AWS/Azure/GCP)",
+    "Testing plans & fault diagnostics",
+    "Disaster recovery basics"
+  ],
+  delivery: "Blended live online lessons; 4-weekly reviews; portfolio, discussion and project assessment.",
+  duration: "18 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Information Communications Technician). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Digital Support Technician — Level 4",
+  section: "apprenticeship",
+  tags: ["Digital","Support","Change","Levy","Apprenticeship","Free"],
+  isForMe: "Those who want to champion digital tools, support colleagues and deliver user-focused change.",
+  involve: "Creates digital products for change; supports end users; manages workflow; trains colleagues.",
+  learn: [
+    "Digital technologies & implementation",
+    "Data management & digital security",
+    "Information systems & standards",
+    "Business & decision-making",
+    "Digital presence principles"
+  ],
+  delivery: "Mixed online & face-to-face with trainer support and online materials.",
+  duration: "18 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Digital Support Technician). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Network Engineer — Level 4",
+  section: "apprenticeship",
+  tags: ["Networks","Infrastructure","Security","Levy","Apprenticeship","Free"],
+  isForMe: "Learners entering or progressing in networking roles to design, run and secure enterprise networks.",
+  involve: "Modern network infrastructure, advanced connectivity and security; prepares for designer/admin roles.",
+  learn: [
+    "Advanced technical skills for role",
+    "Core networking & server admin",
+    "Network hardware/software & services",
+    "Routing protocols; hybrid/cloud networks",
+    "Real-world labs & projects"
+  ],
+  delivery: "Live online lessons; 4-weekly reviews; portfolio, discussion and project assessments.",
+  duration: "30 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Network Engineer). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Software Development Technician — Level 3",
+  section: "apprenticeship",
+  tags: ["Software","Coding","Entry","Levy","Apprenticeship","Free"],
+  isForMe: "New talent or staff moving into development; supportive entry-level coding role.",
+  involve: "Builds essential coding skills, version control, testing and UI basics in a team SDLC context.",
+  learn: [
+    "Intro to software development & fundamentals",
+    "Planning & design; UI/UX basics",
+    "Data sources & SQL",
+    "Cloud & virtualisation basics",
+    "Troubleshooting, testing & deployment"
+  ],
+  delivery: "Remote live lessons + progress coordinator; 4-weekly reviews.",
+  duration: "18 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Software Development Technician). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "IT Solutions Technician — Level 3",
+  section: "apprenticeship",
+  tags: ["IT","Solutions","DevOps","Levy","Apprenticeship","Free"],
+  isForMe: "People keen on servers, networks and software who want to create and support IT solutions.",
+  involve: "Covers solution lifecycle, frameworks (waterfall/agile), standards, networking, platforms and databases.",
+  learn: [
+    "Solution lifecycle & frameworks",
+    "Policies, standards & ethics",
+    "Network concepts & devices; firewalls",
+    "HW/SW interactions; resilience",
+    "Web/mobile/desktop platforms",
+    "Structured/unstructured databases"
+  ],
+  delivery: "Blended online lessons + 4-weekly reviews; portfolio, discussion and project assessment.",
+  duration: "18 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (IT Solutions Technician). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Software Developer — Level 4",
+  section: "apprenticeship",
+  tags: ["Software","Developer","Levy","Apprenticeship","Free"],
+  isForMe: "Developers who will deliver bespoke software, upgrades and quality end-user experiences.",
+  involve: "Upskills junior technicians into developers who design, code, test and document robust solutions.",
+  learn: [
+    "App design; methodologies; intro web",
+    "Database development; server-side coding",
+    "Programming skills & languages",
+    "Systems development essentials",
+    "Communicate solutions; maintain docs"
+  ],
+  delivery: "Interactive delivery via Teams/Zoom with regular coaching and portal resources.",
+  duration: "24 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Software Developer). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "DevOps Engineer — Level 4",
+  section: "apprenticeship",
+  tags: ["DevOps","Cloud","Security","Levy","Apprenticeship","Free"],
+  isForMe: "Those who want to build and operate secure, efficient software and cloud infrastructure.",
+  involve: "Coding/scripts, CI/CD, cloud architecture, security tooling and metrics to improve digital services.",
+  learn: [
+    "Source control value & branching",
+    "Security tools (threat modelling, vuln scanning)",
+    "Problem-solving & impact mapping",
+    "Translate user needs into code & infra",
+    "Automation & lifecycle maintenance",
+    "Metrics/logs for informed decisions"
+  ],
+  delivery: "Online learning with live sessions & practical work; project + practical + professional discussion.",
+  duration: "24 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (DevOps Engineer). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Digital & Technology Solutions Professional (Integrated Degree) — Level 6",
+  section: "apprenticeship",
+  tags: ["Digital","Technology","Degree","Levy","Apprenticeship","Free"],
+  isForMe: "New or existing staff building degree-level capability across software, data, networks or consulting.",
+  involve: "14 knowledge modules (L4–L6) + workshops + work-based projects/portfolio.",
+  learn: [
+    "Software engineering fundamentals",
+    "Networks & security; cyber security",
+    "IT project management; business systems",
+    "Cloud architectures; data analytics & data science"
+  ],
+  delivery: "Blended online + face-to-face workshops; specialisms: Network Engineer, Software Engineer, IT Consultant, Data Analyst.",
+  duration: "36 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (DTS Professional). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Digital & Technology Solutions Specialist (Integrated Degree) — Level 7",
+  section: "apprenticeship",
+  tags: ["Digital","Technology","MSc","Degree","Levy","Apprenticeship","Free"],
+  isForMe: "Professionals developing advanced leadership and technical depth in software, data, cyber, EA or cloud/DevOps.",
+  involve: "Work-based MSc with specialist pathways; strategic technology leadership and architecture.",
+  learn: [
+    "Technical/digital leadership",
+    "SE principles; data & analytics",
+    "Cyber practices; enterprise/technical architecture",
+    "Cloud operations; DevOps/futures"
+  ],
+  delivery: "Two 2-day block workshops per module + 1-to-1 coaching every 8 weeks; coursework & projects.",
+  duration: "36 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (DTS Specialist). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Business Analyst — Level 4",
+  section: "apprenticeship",
+  tags: ["Business Analysis","Change","Levy","Apprenticeship","Free"],
+  isForMe: "People who want to analyse problems, define needs and enable change with stakeholders.",
+  involve: "Stakeholder collaboration, requirements analysis, modelling and benefits management.",
+  learn: [
+    "Analyse data & requirements",
+    "Gap analysis; techniques & methodologies",
+    "Problem documentation & future-state design",
+    "IT solutions & trends; organisational context",
+    "Prioritisation; benefits realisation; legislation"
+  ],
+  delivery: "Live online (face-to-face for closed cohorts). Weekly quizzes; work-based projects; EPA.",
+  duration: "18 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Business Analyst). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Improvement Specialist — Level 5",
+  section: "apprenticeship",
+  tags: ["Improvement","Lean","Six Sigma","Levy","Apprenticeship","Free"],
+  isForMe: "Mid-to-senior staff leading deployment of improvement strategy and training others.",
+  involve: "20 modules over 14 months incl. change management, strategy deployment, capability building and statistics.",
+  learn: [
+    "Leading improvement teams; change planning",
+    "Commercial context; principles & methods",
+    "Process mapping; analytics; stats & measures",
+    "Lean tools; MSA; root cause analysis",
+    "Project selection & scoping; data analysis"
+  ],
+  delivery: "Lean Enabled Group trainers; mix of face-to-face, online, coaching, NHS case studies & simulations.",
+  duration: "14 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Improvement Specialist). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Improvement Leader — Level 6",
+  section: "apprenticeship",
+  tags: ["Improvement","Leadership","Levy","Apprenticeship","Free"],
+  isForMe: "People leading improvement strategy, coaching specialists and designing new services/products.",
+  involve: "Strategy creation, project & change leadership; advanced analytics and Lean Six Sigma.",
+  learn: [
+    "Strategy & continuous improvement",
+    "Lean management; PM & change",
+    "Leadership & teams; statistics",
+    "Professionalism; self-development; reporting"
+  ],
+  delivery: "Online + face-to-face with trainer support.",
+  duration: "18 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Improvement Leader). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Team Leader / Supervisor — Level 3",
+  section: "apprenticeship",
+  tags: ["Leadership","Team","ILM","Levy","Apprenticeship","Free"],
+  isForMe: "First-line managers/supervisors with responsibility for people, projects and workloads.",
+  involve: "ILM-aligned programme developing core leadership/management capabilities.",
+  learn: [
+    "Leading & managing people",
+    "Building relationships & communication",
+    "Operational & project management",
+    "Finance; self-awareness; problem solving"
+  ],
+  delivery: "1-to-1 workplace or online coaching with monthly sessions.",
+  duration: "13 months",
+  cost: "Levy-funded (Free)",
+  how: "See T2 Group (Team Leader). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Operations / Departmental Manager — Level 5",
+  section: "apprenticeship",
+  tags: ["Leadership","Operations","ILM","Levy","Apprenticeship","Free"],
+  isForMe: "Senior managers responsible for teams/projects and departmental goals.",
+  involve: "Leads to Operations/Departmental Manager apprenticeship + ILM Level 5 Diploma.",
+  learn: [
+    "Leading & managing people; relationships",
+    "Communication; operations & project mgmt",
+    "Finance; self-awareness; decision-making"
+  ],
+  delivery: "1-to-1 workplace/online coaching with monthly sessions.",
+  duration: "18 months",
+  cost: "Levy-funded (Free)",
+  how: "See T2 Group (Operational Manager). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Chartered Manager Degree Apprenticeship (CMDA) — Level 6",
+  section: "apprenticeship",
+  tags: ["Management","Degree","CMI","Levy","Apprenticeship","Free"],
+  isForMe: "Managers or aspiring managers seeking chartered status and long-term impact.",
+  involve: "Work-based degree with consultancy & research projects aligned to employer needs.",
+  learn: [
+    "Principles of business 1 & 2",
+    "Strategic management & innovation",
+    "Self-managed learning; final project"
+  ],
+  delivery: "Live online + face-to-face; typically day-release in central London; assignments, projects & exams.",
+  duration: "48 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Chartered Manager Degree). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Senior Leader (Master’s) — Level 7",
+  section: "apprenticeship",
+  tags: ["Senior Leader","Strategy","Levy","Apprenticeship","Free"],
+  isForMe: "High-potential professionals influencing at senior/board level and setting culture/strategy.",
+  involve: "Strategic leadership programme accelerating career development and organisational performance.",
+  learn: [
+    "Mission, culture & values; ethics",
+    "Competitive strategy; decision-making with data",
+    "Finance & economic modelling",
+    "Org dynamics; high-performance cultures",
+    "Stakeholder diplomacy & influence"
+  ],
+  delivery: "Structured online + face-to-face immersive masterclasses and 1-to-1 executive coaching.",
+  duration: "24 months",
+  cost: "Levy-funded (Free)",
+  how: "See MMU Senior Leader (L7). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Business Administration — Level 3",
+  section: "apprenticeship",
+  tags: ["Business Admin","Operations","Levy","Apprenticeship","Free"],
+  isForMe: "People handling central business functions who support BAU across teams and customers.",
+  involve: "Develops agile delivery, stakeholder engagement and a live business project to add value.",
+  learn: [
+    "Business & organisations; governance",
+    "Ops & project basics; stakeholders & regulation",
+    "Business fundamentals & processes",
+    "External environment & policy"
+  ],
+  delivery: "Blended: virtual classroom + platform resources, mentoring, peer network and workshops.",
+  duration: "15–18 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Business Administrator). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Master of Business Administration (MBA) — Level 7",
+  section: "apprenticeship",
+  tags: ["MBA","Leadership","Strategy","Levy","Apprenticeship","Free"],
+  isForMe: "Middle managers moving to senior roles; fast-track talent needing strategic, financial and people skills.",
+  involve: "Executive MBA with commercial application (Grant Thornton partnership) + coaching and simulations.",
+  learn: [
+    "Accountancy & economics; data analytics",
+    "Global macroeconomics & environment",
+    "People & change; organisational behaviour",
+    "Programme/project mgmt; law; HR; M&A",
+    "Sales & customer; negotiation; strategy"
+  ],
+  delivery: "Industry-led teaching, simulations, 1-to-1 leadership coaching; cohort-based network.",
+  duration: "24 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Senior Leader MBA). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Associate Project Manager — Level 4",
+  section: "apprenticeship",
+  tags: ["Projects","APM PMQ","Levy","Apprenticeship","Free"],
+  isForMe: "Apprentices/graduates/junior-mid PMs or anyone managing projects in role.",
+  involve: "Includes APM PMQ; workshops + coaching + guided self-learning to develop outstanding PMs.",
+  learn: [
+    "Leadership, teamwork, ethics",
+    "Context & governance",
+    "Business case, plans & comms",
+    "Scope, resources, budget & cost control",
+    "Risk, contracts & quality"
+  ],
+  delivery: "Online learning with videos, podcasts and assignments mapped to real-world practice.",
+  duration: "24 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Associate Project Manager). E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Project Management Degree — Level 6",
+  section: "apprenticeship",
+  tags: ["Projects","Degree","Levy","Apprenticeship","Free"],
+  isForMe: "Staff responsible for overseeing projects who want degree-level PM capability.",
+  involve: "Builds high-level human and technical PM skills to lead cross-functional projects.",
+  learn: [
+    "Governance & financial control",
+    "Business environment & change",
+    "Stakeholders & comms",
+    "Estimating, planning & scheduling",
+    "Justification, quality, procurement & risk",
+    "Change control; strategy"
+  ],
+  delivery: "Blended distance learning with webinars and rich online resources.",
+  duration: "48 months",
+  cost: "Levy-funded (Free)",
+  how: "See Institute for Apprenticeships (Project Manager Degree). E-mail gstt.DTIAcademy@nhs.net"
+},
+// Available on request (enquire for details)
+{
+  title: "Software Tester — Level 4 (on request)",
+  section: "apprenticeship",
+  tags: ["Software","Testing","Levy","Apprenticeship","Free"],
+  isForMe: "Staff moving into QA/testing roles.",
+  involve: "Covers testing lifecycle and automation skills.",
+  learn: ["Programme content TBC with provider"],
+  delivery: "TBC",
+  duration: "TBC",
+  cost: "Levy-funded (Free)",
+  how: "E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Artificial Intelligence (AI) Data Specialist — Level 7 (on request)",
+  section: "apprenticeship",
+  tags: ["AI","Data","Levy","Apprenticeship","Free"],
+  isForMe: "Advanced data/AI roles requiring specialist methods.",
+  involve: "Advanced AI/ML applications in business.",
+  learn: ["Programme content TBC with provider"],
+  delivery: "TBC",
+  duration: "TBC",
+  cost: "Levy-funded (Free)",
+  how: "E-mail gstt.DTIAcademy@nhs.net"
+},
+{
+  title: "Digital User Experience (UX) Professional (Integrated Degree) — Level 6 (on request)",
+  section: "apprenticeship",
+  tags: ["UX","Design","Degree","Levy","Apprenticeship","Free"],
+  isForMe: "People building professional UX capability.",
+  involve: "Degree apprenticeship focused on UX research and design practice.",
+  learn: ["Programme content TBC with provider"],
+  delivery: "TBC",
+  duration: "TBC",
+  cost: "Levy-funded (Free)",
+  how: "E-mail gstt.DTIAcademy@nhs.net"
+}
+
+];
+
+// --- UI ---
+const filtersEl = document.getElementById('filters');
+const chips = ["Free","Paid","Virtual","Teams","Instructor","Provider","Epic","Security","Leadership","Projects","Risk","Data","Excel","Outlook"];
+chips.forEach(t=>{
+  const b=document.createElement('button');
+  b.className='chip'; b.textContent=t;
+  b.onclick=()=>{ b.classList.toggle('active'); render(); };
+  filtersEl.appendChild(b);
+});
+
+function linkify(str){
+  if(!str) return "";
+  const emailRx = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
+  const urlRx = /(https?:\/\/[^\s<]+)/g;
+  return str.replace(emailRx, '<a href="mailto:$1">$1</a>').replace(urlRx,'<a href="$1">$1</a>');
+}
+
+function courseCard(d){
+  const learnList = d.learn?.map(i=>`<li>${i}</li>`).join('') || '';
+  return `<article class="card" data-tags="${(d.tags||[]).join(' ').toLowerCase()}" data-section="${d.section}">
+    <span class="pill">${d.cost||''}</span>
+    <div class="head">
+      <h3>${d.title}</h3>
+      <div class="meta">
+        <span class="badge">${d.duration||'Duration TBC'}</span>
+        <span class="badge">${d.delivery||'Delivery TBC'}</span>
+      </div>
+    </div>
+    <div class="body">
+      ${d.desc?`<p class="desc">${d.desc}</p>`:''}
+      <details open>
+        <summary><span class="chev">▶</span> Is this for me?</summary>
+        <div class="block">${d.isForMe||'See details on suitability in the full description.'}</div>
+      </details>
+      <details>
+        <summary><span class="chev">▶</span> What does it involve?</summary>
+        <div class="block">${d.involve||'See course outline.'}</div>
+      </details>
+      <details>
+        <summary><span class="chev">▶</span> What will I learn?</summary>
+        <div class="block"><ul>${learnList}</ul></div>
+      </details>
+      <div class="row">
+        <h4>How to book</h4>
+        <div>${linkify(d.how||'Contact the Academy')}</div>
+      </div>
+    </div>
+  </article>`;
+}
+
+function render(){
+  const q=(document.getElementById('q').value||'').trim().toLowerCase();
+  const active=[...document.querySelectorAll('.chip.active')].map(x=>x.textContent.toLowerCase());
+const it   = DATA.filter(d=>d.section==='it');
+const soft = DATA.filter(d=>d.section==='soft');
+const apps = DATA.filter(d=>d.section==='apprenticeship');
+  const match=d=>{
+    const hay=(d.title+' '+(d.tags||[]).join(' ')+' '+(d.isForMe||'')+' '+(d.involve||'')+' '+(d.learn||'')+' '+(d.delivery||'')+' '+(d.how||'')+' '+(d.cost||'')).toLowerCase();
+    const qok=q?hay.includes(q):true;
+    const tok=active.length?active.every(t=>hay.includes(t)):true;
+    return qok && tok;
+  };
+  const itOut=it.filter(match).map(courseCard).join('');
+  const softOut=soft.filter(match).map(courseCard).join('');
+  const appsOut = apps.filter(match).map(courseCard).join('');
+  document.getElementById('grid-it').innerHTML=itOut || `<div class="empty">No IT/Technical matches. Try different filters.</div>`;
+  document.getElementById('grid-soft').innerHTML=softOut || `<div class="empty">No Soft Skills matches. Try different filters.</div>`;
+document.getElementById('grid-apprenticeships').innerHTML = appsOut || `<div class="empty">No Apprenticeship matches. Try different filters.</div>`;
+}
+render();
+
+// keyboard shortcut
+const searchEl=document.getElementById('q');
+window.addEventListener('keydown',(e)=>{
+  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();searchEl.focus();}
+});
+
+// print
+document.getElementById('printBtn').onclick=()=>window.print();
+
+// scrollspy + back-to-top
+const spyLinks=[...document.querySelectorAll('#spy a')];
+const sections=spyLinks.map(a=>document.querySelector(a.getAttribute('href')));
+const topBtn=document.getElementById('topBtn');
+const obs=new IntersectionObserver((entries)=>{
+  entries.forEach(entry=>{
+    const id='#'+entry.target.id;
+    if(entry.isIntersecting){
+      spyLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===id));
+    }
+  });
+},{rootMargin:'-60% 0px -35% 0px',threshold:[0,1]});
+sections.forEach(s=>obs.observe(s));
+window.addEventListener('scroll',()=>{topBtn.style.display=window.scrollY>500?'block':'none';});
+topBtn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+
+// live search
+searchEl.addEventListener('input',render);
+</script>
+</body>
+</html>
