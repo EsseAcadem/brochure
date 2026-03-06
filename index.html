@@ -3,485 +3,354 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>DT&amp;I Training </title>
+<title>DT&amp;I Training</title>
 <meta name="description" content="DT&I Training Academy Brochure — searchable, filterable, single-file HTML version.">
-<style>
-  :root{
-    --bg:#0a0d1a; --panel:#0f1426; --card:#005b7a; --cardTop:#0b1430;
-    --ink:#f5f7fb; --muted:#b9c0cf; --line:rgba(255,255,255,.14);
-    --brand:#ffd84d; --accent:#4dd2ff; --chip:#1b2447; --chipOn:#fff6cc; --chipOnText:#1c2240;
-    --btn:#121b3a; --btnOn:#233161; --radius:18px; --ring:0 0 0 3px rgba(77,210,255,.35);
-    --shadow:0 10px 30px rgba(0,0,0,.25);
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-    --page:#ffffff; --inkLight:#1c2237; --lineLight:#e1e6f0;
-    --chipLight:#eef2f9; --chipLightOn:#0b5bd3; --chipLightOnText:#ffffff;
-    --btnLight:#f3f6fc; --btnLightOn:#e7ecf7;
+<style>
+  :root {
+    --bg: #0a0d1a; 
+    --card: #131b33; 
+    --ink: #f5f7fb; 
+    --muted: #a1abc0; 
+    --line: rgba(255,255,255,.12);
+    --accent: #4dd2ff; 
+    --radius: 16px; 
+    --ring: 0 0 0 3px rgba(0, 94, 184, 0.35);
+    --shadow: 0 8px 24px rgba(0,0,0,.15);
+    --page: #f8fafc; 
+    --inkLight: #0f172a; 
+    --lineLight: #e2e8f0;
+    --chipLight: #ffffff; 
+    --nhsBlue: #005EB8;      
+    --nhsBlueDark: #003087;  
   }
 
-  *{box-sizing:border-box}
-  html,body{margin:0;background:var(--page);color:var(--inkLight);
-    font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,"Noto Sans",sans-serif;line-height:1.45}
-  a{color:#0b5bd3;text-decoration:underline} a:hover{text-decoration:none}
-  .layout{display:grid;grid-template-columns:290px 1fr;min-height:100vh}
-  aside{position:sticky;top:0;height:100vh;padding:16px;border-right:1px solid var(--line);
-    background:linear-gradient(180deg, rgba(255,255,255,0.03), transparent 55%);
-    backdrop-filter: blur(8px) saturate(120%); color:var(--ink); background-color:var(--bg);}
-  .brand{display:flex;align-items:center;gap:2px;margin-bottom:6px;justify-content:center}
-  .brand img{width:254px;height:94px;}
-  .spy{list-style:none;padding:0;margin:12px 0;max-height:calc(100vh - 210px);overflow:auto}
-  .spy a{display:block;padding:10px 12px;border-radius:12px;color:var(--ink);opacity:.9}
-  .spy a.active,.spy a:hover{background:rgba(255,255,255,0.08);opacity:1}
-  .footnote{font-size:12px;color:var(--muted);margin-top:12px}
-aside .footnote{
-  text-align: center;
-  width: 100%;
-  display: block;
-}
-  .content{padding:18px 18px 80px;background:var(--page);color:var(--inkLight)}
-aside { text-align: center; }
-  header.app{position:sticky;top:0;z-index:10;background:#fff;border-bottom:1px solid var(--lineLight)}
-  .toolbar{display:flex;gap:12px;align-items:center;padding:12px 16px}
-  .title{font-size:18px;font-weight:800;margin-right:auto;letter-spacing:.2px}
-  .search{flex:1;position:relative}
-  .search input{width:100%;padding:12px 42px 12px 14px;border-radius:14px;border:1px solid var(--lineLight);background:#fff;color:var(--inkLight);outline:none}
-  .search input:focus{box-shadow:var(--ring);border-color:transparent}
-  .search .icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);opacity:.7;font-size:13px;color:#647085}
-  .btn{border:1px solid var(--lineLight);background:var(--btnLight);color:var(--inkLight);padding:10px 14px;border-radius:12px;cursor:pointer}
-  .btn:hover{background:var(--btnLightOn)}
-  .filters{display:flex;flex-wrap:wrap;gap:8px;padding:10px 16px 16px}
-  .chip{padding:8px 12px;background:var(--chipLight);border:1px solid var(--lineLight);border-radius:999px;font-size:13px;cursor:pointer;user-select:none;color:var(--inkLight)}
-  .chip.active{background:var(--chipLightOn);border-color:var(--chipLightOn);color:var(--chipLightOnText)}
-  .section{scroll-margin-top:120px;margin-top:22px}
-  .section h2{font-size:20px;margin:18px 6px}
-  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:16px}
-
-  .card{grid-column:span 6;background:linear-gradient(180deg,var(--cardTop),var(--card));
-        border:1px solid var(--line);border-radius:var(--radius);padding:0;position:relative;
-        box-shadow:var(--shadow);overflow:hidden;color:var(--ink)}
-  .card a{color:var(--accent)}
-  .card .head{padding:14px 16px;border-bottom:1px solid rgba(255,255,255,0.1);background:rgba(255,255,255,0.03)}
-  .card h3{margin:0;font-size:16px}
-  .meta{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:8px}
-  .badge{padding:3px 8px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,0.06)}
-  .body{padding:14px 16px}
-  .pill{position:absolute;top:10px;right:10px;font-size:12px;padding:4px 9px;border-radius:999px;background:#1b2552;border:1px solid var(--line)}
-  details{border-top:1px dashed rgba(255,255,255,0.12)}
-  details summary{cursor:pointer;list-style:none;user-select:none;font-weight:700;display:flex;align-items:center;gap:8px;padding:12px 0;color:#eef1ff}
-  details summary .chev{display:inline-block;transition:transform .25s ease;font-size:12px;opacity:.9}
-  details[open] summary .chev{transform:rotate(90deg)}
-  details .block{padding:0 0 12px 22px;color:#ecf0ff}
-  .row{padding:8px 0;border-top:1px dashed rgba(255,255,255,0.12)}
-  .row h4{margin:6px 0 4px;font-size:12px;letter-spacing:.03em;text-transform:uppercase;color:var(--muted)}
-  .row div{font-size:14px}
-  .empty{padding:20px;color:#647085;font-size:14px}
-  .hr{height:1px;background:#e9edf5;margin:24px 0}
-  .kicker{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:#6b758a;margin:2px 6px}
-  .hero{background:transparent}
-  .intro{background:#f7f9fe;border:1px solid var(--lineLight);border-radius:var(--radius);padding:18px;margin:8px 0 16px;color:var(--inkLight)}
-  .intro p{margin:8px 0}
-  .kbd{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,"Liberation Mono",monospace;font-size:12px;background:#eef2fa;border:1px solid var(--lineLight);border-radius:6px;padding:2px 6px;color:#334}
-  .top{position:fixed;right:16px;bottom:16px;padding:10px 12px;border-radius:14px;background:var(--btnLight);border:1px solid var(--lineLight);cursor:pointer;display:none;color:var(--inkLight)}
-  @media (max-width:1100px){.layout{grid-template-columns:1fr}aside{position:static;height:auto}.spy{max-height:none}}
-  @media (max-width:860px){.card{grid-column:span 12}}
-/* --- Glass tokens (optional) --- */
-:root{
-  --glassDarkA: rgba(16,22,45,.55);     /* sidebar fill */
-  --glassDarkB: rgba(16,22,45,.35);     /* sidebar gradient tail */
-  --glassLine: rgba(255,255,255,.10);   /* subtle light border on dark glass */
-  --glassLight: rgba(255,255,255,.45);  /* search fill */
-  --glassLightLine: rgba(255,255,255,.60);
-}
-
-
-/* --- Glass tokens (keep) --- */
-:root{
-  --glassDarkA: rgba(14,20,40,.55);
-  --glassDarkB: rgba(14,20,40,.32);
-  --glassLine: rgba(255,255,255,.18);
-  --glassLight: rgba(255,255,255,.28);
-  --glassLightLine: rgba(255,255,255,.45);
-}
-
-
-
-
-
-
-
-
-/* --- Animated glassy sidebar (reliable movement) --- */
-.layout > aside{
-  position: sticky; /* keep your sticky */
-  overflow: hidden; /* hide overflow of glow layers */
-  background: rgba(11,20,48,0.90); /* deep navy base */
-  -webkit-backdrop-filter: blur(18px) saturate(140%);
-  backdrop-filter: blur(18px) saturate(140%);
-  border-right: 1px solid rgba(255,255,255,.08);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 12px 28px rgba(0,0,0,.25);
-  isolation: isolate; /* make sure z-index works predictably */
-}
-
-/* Layer 1: slow rotating colour wash (blue → purple), softened */
-.layout > aside::before{
-  content:"";
-  position:absolute; inset:-40%;           /* oversize canvas to avoid edges */
-  background:
-    conic-gradient(
-      from 0deg,
-      rgba(0,120,255,0.22) 0deg,           /* blue */
-      rgba(180,0,200,0.22) 140deg,         /* purple */
-      rgba(40,60,140,0.20) 220deg,         /* navy tint */
-      rgba(0,120,255,0.22) 360deg
-    );
-  mix-blend-mode: screen;
-  filter: blur(26px);
-  opacity: 0.75;
-  transform-origin: 50% 50%;
-  animation: sidebarSpin 80s linear infinite;
-  z-index: 0;
-  pointer-events: none;
-  will-change: transform;
-}
-
-/* Layer 2: a gentle blue glow that drifts diagonally */
-.layout > aside::after{
-  content:"";
-  position:absolute; width:200%; height:200%;
-  left:-60%; top:-55%;
-  background: radial-gradient(circle at 50% 50%,
-              rgba(0,120,255,0.18), transparent 60%);
-  mix-blend-mode: screen;
-  filter: blur(14px);
-  opacity: 0.8;
-  animation: sidebarDrift 65s ease-in-out infinite alternate;
-  z-index: 0;
-  pointer-events: none;
-  will-change: transform;
-}
-
-/* Keep your real content above the glow layers */
-.layout > aside .brand,
-.layout > aside .spy,
-.layout > aside .footnote{
-  position: relative;
-  z-index: 1;
-}
-
-/* Animations */
-@keyframes sidebarSpin{
-  from { transform: rotate(0deg) scale(1.02); }
-  to   { transform: rotate(360deg) scale(1.02); }
-}
-@keyframes sidebarDrift{
-  0%   { transform: translate(0%, 0%) scale(1); }
-  50%  { transform: translate(6%, 4%) scale(1.04); }
-  100% { transform: translate(-4%, -5%) scale(0.98); }
-}
-
-/* Optional: make it easier to see briefly, then slow it down */
-@media (prefers-reduced-motion: reduce){
-  .layout > aside::before,
-  .layout > aside::after{ animation: none; }
-}
-
-
-
-
-
-/* === Readability fixes (cards) === */
-
-/* darker, crisper header and divider so the meta line reads again */
-.card .head{
-  background:linear-gradient(180deg, rgba(255,255,255,.24), rgba(255,255,255,0));
-  border-bottom:1px solid rgba(17,34,68,.16); /* visible on glass */
-}
-
-/* slightly denser glass + darker ink on the card */
-.card{
-  background: linear-gradient(180deg, rgba(255,255,255,.26), rgba(255,255,255,.10));
-  -webkit-backdrop-filter: blur(10px) saturate(140%);
-  backdrop-filter: blur(10px) saturate(140%);
-  border:1px solid rgba(255,255,255,.36);
-  color:#17233d;
-}
-
-/* meta row + badges with proper contrast */
-.meta{ color:#3a4763; }
-.badge{
-  background:rgba(255,255,255,.55);
-  border-color:rgba(17,34,68,.20);
-  color:#17233d;
-}
-
-/* price pill (Free/££) – make it pop again */
-.pill{
-  background:linear-gradient(180deg,#1b2550,#0f1a3d);
-  color:#fff;
-  border-color:rgba(255,255,255,.40);
-  box-shadow:0 2px 8px rgba(0,0,0,.28), inset 0 1px 0 rgba(255,255,255,.25);
-}
-
-/* links readable on the lighter card */
-.card a{ color:#0b5bd3; }
-
-/* details content ink */
-details summary{ color:#17233d; }
-details .block{ color:#24304d; }
-
-/* --- Fix stray brace: remove the lone "}" above the card fixes --- */
-
-
-/* --- Frosted header + glassy search --- */
-header.app{
-  background: rgba(255,255,255,.18);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  backdrop-filter: blur(14px) saturate(140%);
-  border-bottom: 1px solid var(--glassLightLine);
-}
-
-.search input{
-  background: var(--glassLight);
-  border: 1px solid var(--glassLightLine);
-  -webkit-backdrop-filter: blur(10px) saturate(150%);
-  backdrop-filter: blur(10px) saturate(150%);
-  color: #132;
-  box-shadow: 0 8px 22px rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.55);
-}
-.search input:focus{
-  box-shadow: var(--ring), 0 8px 22px rgba(0,0,0,.12);
-  border-color: transparent;
-}
-.search input::placeholder{ color: rgba(19,34,50,.7); }
-.search .icon{ color:#4b5872; opacity:.9; }
-/* — Softer card shadow — */
-.card{
-  box-shadow: 0 8px 20px rgba(0,0,0,.20), inset 0 1px 0 rgba(255,255,255,.06);
-}
-
-/* — Make the dashed separators clearly visible again — */
-.card .head{
-  border-bottom: 1px dashed rgba(255,255,255,.35);
-}
-
-details{
-  border-top: 1px dashed rgba(255,255,255,.30);
-}
-
-.card .row{
-  border-top: 1px dashed rgba(255,255,255,.30);
-}
-
-/* optional: a touch more contrast when hovering the summary rows */
-details summary:hover{ color:#fff; opacity:.95 }
-
-
-
-/* Smooth lift on hover */
-.card{
-  transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  will-change: transform;
-}
-.card:hover{
-  transform: translateY(-4px);                 /* the small jump */
-  box-shadow: 0 12px 26px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.06);
-  border-color: rgba(255,255,255,.50);
-}
-/* Respect reduced-motion */
-@media (prefers-reduced-motion: reduce){
-  .card{ transition:none }
-  .card:hover{ transform:none }
-}
-
-
-
-:root{
-  --dashBlue: rgba(35, 27, 31, 0.29);   /* light blue for dashed lines */
-}
-
-/* Apply to the three separators */
-.card .head{ border-bottom: 1px dashed var(--dashBlue); }
-details{ border-top: 1px dashed var(--dashBlue); }
-.card .row{ border-top: 1px dashed var(--dashBlue); }
-
-details summary:hover{ color:#0b5bd3; opacity:1; }
-
-
-
-/* === NHS Blue headings === */
-:root{
-  --nhsBlue: #005EB8;      /* NHS Blue */
-  --nhsBlueDark: #003087;  /* Optional darker shade */
-  -- Black: #000000
-}
-
-/* Section titles (IT & Technical, Soft Skills, Apprenticeships, etc.) */
-.section h2{
-  color: var(--nhsBlue);
-}
-
-/* Course titles inside cards */
-.card .head h3{
-  color: var(--nhsBlue);
-}
-
-
-details summary:hover{
-  color: var(--nhsBlue);
-  opacity: 1;
-}
-
-
-/* === Slight size increase for headings (responsive) === */
-:root{
-  --h2-size: clamp(24px, 2vw + 12px, 32px);  /* section titles */
-  --h3-size: clamp(18px, 1vw + 14px, 22px);  /* course titles */
-  --kicker-size: 13px;                        /* small label above h2 */
-}
-
-/* Section titles: e.g., IT, Soft Skills, Apprenticeships */
-.section h2{
-  font-size: var(--h2-size);
-  line-height: 1.2;
-  margin: 20px 6px 10px; /* a touch more breathing room */
-}
-
-/* Course titles inside cards */
-.card .head h3{
-  font-size: var(--h3-size);
-  line-height: 1.25;
-}
-
-/* Optional: make the small kicker label slightly bigger, too */
-.kicker{
-  font-size: var(--kicker-size);
-  letter-spacing: .14em;
-}
-
-/* Optional: a tad more vertical rhythm between sections */
-.section{
-  margin-top: 26px; /* was ~22px */
-}
-
-
-/* --- Section & card spacing (single source of truth) --- */
-.section{
-  margin-top: 58px;              /* space above each section */
-}
-
-.section > h2{
-  margin: 0 6px 54px;            /* space under the title (overrides earlier 18px 6px) */
-}
-
-.section > .grid{
-  margin-top: 12px;              /* space before the first card row */
-}
-
-.grid{
-  gap: 20px;                      /* a touch more space between cards */
-}
-
-
-
-
-
+  * { box-sizing: border-box; }
+  
+  html, body {
+    margin: 0;
+    background: var(--page);
+    color: var(--inkLight);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+    scroll-behavior: smooth;
+  }
+  
+  a { color: var(--nhsBlue); text-decoration: none; font-weight: 500; } 
+  a:hover { text-decoration: underline; }
+  
+  .layout { display: grid; grid-template-columns: 290px 1fr; min-height: 100vh; }
+  
+  /* --- Animated Glass Sidebar --- */
+  aside {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    padding: 24px 16px;
+    background: rgba(11,20,48,0.95);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    border-right: 1px solid rgba(255,255,255,.08);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 12px 28px rgba(0,0,0,.25);
+    color: var(--ink);
+    isolation: isolate;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  aside::before {
+    content: "";
+    position: absolute; inset: -50%;
+    background: conic-gradient(from 0deg, rgba(0,120,255,0.2) 0deg, rgba(180,0,200,0.2) 140deg, rgba(40,60,140,0.15) 220deg, rgba(0,120,255,0.2) 360deg);
+    mix-blend-mode: screen;
+    filter: blur(30px);
+    opacity: 0.8;
+    animation: sidebarSpin 60s linear infinite;
+    z-index: -1;
+  }
+
+  @keyframes sidebarSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+
+  .brand, .spy, .footnote { position: relative; z-index: 1; }
+  
+  .brand { display: flex; align-items: center; justify-content: center; margin-top: 80px; margin-bottom: 32px; }
+  .brand img { width: 220px; height: auto; } 
+
+  .spy { list-style: none; padding: 0; margin: 0; flex-grow: 1; overflow-y: auto; }
+  .spy li { margin-bottom: 4px; }
+  .spy a { 
+    display: block; 
+    padding: 12px 16px; 
+    border-radius: 12px; 
+    color: var(--muted); 
+    font-weight: 500; 
+    transition: all 0.2s ease; 
+  }
+  .spy a.active, .spy a:hover { background: rgba(255,255,255,0.1); color: #fff; }
+  .footnote { font-size: 12px; color: var(--muted); margin-top: 24px; text-align: center; opacity: 0.7; }
+  
+  .content { padding: 0 0 80px; }
+
+  .hero-search {
+    background: #fff;
+    padding: 80px 40px 60px;
+    border-bottom: 1px solid var(--lineLight);
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+  }
+  
+  .hero-search h1 {
+    font-size: clamp(32px, 4vw, 48px);
+    color: var(--nhsBlueDark);
+    margin: 0 0 16px 0;
+    font-weight: 800;
+    letter-spacing: -1px;
+  }
+  
+  .hero-search p {
+    color: #475569;
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto 32px;
+  }
+
+  .search { position: relative; max-width: 600px; margin: 0 auto; }
+  .search input {
+    width: 100%;
+    padding: 20px 56px 20px 28px;
+    border-radius: 99px;
+    border: 2px solid #cbd5e1;
+    background: #fff;
+    color: var(--inkLight);
+    outline: none;
+    font-family: inherit;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  }
+  .search input:focus { border-color: var(--nhsBlue); box-shadow: var(--ring); transform: translateY(-2px); }
+  .search .icon { position: absolute; right: 28px; top: 50%; transform: translateY(-50%); color: #64748b; font-size: 16px; font-weight: bold;}
+  
+  .filters { display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin-top: 32px; max-width: 800px; margin-left: auto; margin-right: auto; }
+  .chip {
+    padding: 10px 20px;
+    background: var(--chipLight);
+    border: 1px solid #cbd5e1;
+    border-radius: 99px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    color: #475569;
+    transition: all 0.2s ease;
+  }
+  .chip:hover { border-color: #94a3b8; color: var(--inkLight); background: #f1f5f9; }
+  .chip.active { background: var(--nhsBlue); border-color: var(--nhsBlue); color: #fff; }
+  
+  /* Sections - Initially display:none for Siri effect */
+  .section { scroll-margin-top: 40px; margin-top: 56px; padding: 0 40px; display: none; }
+  .section h2 { font-size: 24px; margin: 0 0 8px 0; color: var(--nhsBlueDark); font-weight: 800; border-bottom: 2px solid #e2e8f0; padding-bottom: 12px; }
+  .section-desc { color: #64748b; font-size: 15px; margin-bottom: 24px; }
+  
+  .grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; }
+
+  /* Modern Card Logic */
+  .card {
+    grid-column: span 6;
+    background: #0f172a; 
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius);
+    padding: 0;
+    position: relative;
+    box-shadow: var(--shadow);
+    color: #fff;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    animation: fadeUp 0.5s ease-out forwards; 
+    overflow: hidden;
+  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 16px 32px rgba(0,0,0,0.25); border-color: rgba(255,255,255,0.2); }
+
+  .card .head { padding: 20px 20px 16px; background: rgba(255,255,255,0.05); border-bottom: 1px dashed rgba(255,255,255,0.2); }
+  .card h3 { margin: 0; font-size: 18px; font-weight: 700; color: #fff; padding-right: 70px; }
+  
+  .meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .badge { padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: 600; background: rgba(255,255,255,0.1); color: #e2e8f0; }
+  
+  .body { padding: 20px; flex-grow: 1; }
+  
+  .pill {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 99px;
+    background: var(--nhsBlue);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(0,94,184,0.4);
+  }
+
+  details {
+    margin-top: 8px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+  }
+  details summary {
+    cursor: pointer;
+    list-style: none;
+    font-weight: 600;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 16px;
+    color: #cbd5e1;
+    transition: background 0.2s ease;
+  }
+  details summary:hover { background: rgba(255,255,255,0.08); color: #fff; }
+  details[open] summary { border-bottom: 1px solid rgba(255,255,255,0.1); color: #fff; }
+  details .block { padding: 16px; font-size: 14px; color: #cbd5e1; line-height: 1.6; }
+  details .block ul { margin: 8px 0 0 0; padding-left: 20px; }
+  details .block li { margin-bottom: 4px; }
+
+  .row { margin-top: 16px; padding: 16px; background: rgba(255,255,255,0.04); border-radius: 8px; border-top: 1px dashed rgba(255,255,255,0.1); }
+  .row h4 { margin: 0 0 4px 0; font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: #94a3b8; }
+  .row div { font-size: 14px; color: #fff; }
+  .row a { color: var(--accent); }
+
+  /* Booking Fix: Title never disappears or turns white */
+  .booking-toggle {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+    display: block; 
+  }
+  .booking-toggle summary {
+    padding: 20px 24px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--nhsBlueDark) !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #fff;
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+  }
+  .booking-toggle summary:hover, .booking-toggle[open] summary {
+    background: #f1f5f9;
+    color: var(--nhsBlueDark) !important;
+  }
+  .booking-toggle summary::after { content: "View Instructions ↓"; font-size: 13px; color: #64748b; font-weight: 500; }
+  .booking-toggle[open] summary::after { content: "Hide Instructions ↑"; }
+
+  .intro-text { padding: 0 24px 24px; }
+  .intro-text ul { margin: 0; padding-left: 20px; color: #334155; line-height: 1.7; }
+  .intro-text li { margin-bottom: 12px; font-size: 15px; }
+
+  .top {
+    position: fixed;
+    right: 24px; bottom: 24px;
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: var(--nhsBlue);
+    border: none; color: #fff;
+    font-size: 20px; cursor: pointer;
+    display: none; z-index: 100;
+    box-shadow: 0 4px 12px rgba(0,94,184,0.3);
+  }
+
+  @keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(15px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 1100px) {
+    .layout { grid-template-columns: 1fr; }
+    aside { position: static; height: auto; border-right: none; padding: 16px; }
+    .brand { margin-top: 20px; }
+    .spy { display: flex; gap: 8px; overflow-x: auto; white-space: nowrap; padding-bottom: 8px; }
+  }
 </style>
 </head>
 <body>
 <div class="layout">
   <aside>
     <div class="brand">
-<img alt="Essentia Academy" src="https://raw.githubusercontent.com/EsseAcadem/brochure/main/academylogo.png?v=1">
-
-
+      <img alt="Essentia Academy" src="https://raw.githubusercontent.com/EsseAcadem/brochure/main/academylogo.png?v=1">
     </div>
     <ul class="spy" id="spy">
       <li><a href="#welcome" class="active">Welcome</a></li>
-      <li><a href="#booking">How booking works</a></li>
-      <li><a href="#it-tech">IT &amp; Technical</a></li>
-      <li><a href="#soft-skills">Soft Skills</a></li>
-      <li><a href="#apprenticeships">Apprenticeships</a></li>
+      <li><a href="#booking">How to Book</a></li>
+      <li><a href="#it-tech" onclick="forceRevealSection('it')">IT &amp; Technical</a></li>
+      <li><a href="#soft-skills" onclick="forceRevealSection('soft')">Soft Skills</a></li>
+      <li><a href="#apprenticeships" onclick="forceRevealSection('apprenticeship')">Apprenticeships</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
-    <div class="footnote">
-      X Edition<br>
-      By Rafael Battaglini
-    </div>
+    <div class="footnote">X Edition<br>By Rafael Battaglini</div>
   </aside>
 
   <main class="content">
-    <header class="app">
-      <div class="toolbar">
-        <div class="title">DT&amp;I Training Brochure</div>
-        <div class="search">
-          <input id="q" placeholder="Search courses, topics, delivery, cost…">
-          <span class="icon">⌘K</span>
-        </div>
-        <button class="btn" id="printBtn" title="Print or save as PDF">Print</button>
+    <header class="hero-search" id="welcome">
+      <h1>What would you like to learn today?</h1>
+      <p>Search by topic or select a category from the menu to discover your next career move.</p>
+      <div class="search">
+        <input id="q" placeholder="Type a topic (e.g. Excel, Cyber, Free)...">
+        <span class="icon">⌘K</span>
       </div>
       <div class="filters" id="filters"></div>
     </header>
 
-    <section id="welcome" class="section hero">
-      <p class="kicker">Welcome</p>
-      <h2>A word from DT&amp;I</h2>
-      <div class="intro">
-        <p>Welcome to the latest DT&amp;I Training Brochure. Explore technical, soft skills and apprenticeship options to support your development and career progression.</p>
-     
-      </div>
-    </section>
-
-    <section id="booking" class="section">
-      <p class="kicker">Process</p>
-      <h2>How booking works</h2>
-      <div class="intro">
-        <ul>
-          <li><strong>Free courses</strong> are delivered by the Essentia Academy or part of the Trust offer. Ask your manager, then email the contact on each card.</li>
-          <li><strong>Paid courses</strong> require a training request form, manager support, and committee approval (the current GSTT window closes at the <u>end of February</u>).</li>
-          <li><strong>Apprenticeships</strong> are levy-funded; require role fit and manager approval; Trust form starts enrolment.</li>
-        </ul>
-      </div>
-      <div class="hr"></div>
+    <section id="booking" class="section" style="margin-top: 40px; display: block;">
+      <details class="booking-toggle">
+        <summary>Process & How to book</summary>
+        <div class="intro-text">
+          <ul>
+            <li><strong>Free courses:</strong> Delivered by the Essentia Academy or Trust. Ask your manager, then e-mail the contact on the specific course card.</li>
+            <li><strong>Paid courses:</strong> These require manager support and approval from the committee. We announce new application rounds from time to time—please keep an eye on the <strong>DT&I Newsletter</strong> for news.</li>
+            <li><strong>Apprenticeships:</strong> These are levy-funded and have <strong>no closing date</strong>, so you can enrol at any time. You will need your manager's approval and a commitment to spend 6 hours a week on your studies. If you are interested, please <a href="mailto:rafael.battaglini@nhs.net">get in touch</a> with the Academy team.</li>
+          </ul>
+        </div>
+      </details>
     </section>
 
     <section id="it-tech" class="section">
-      <p class="kicker">Catalogue</p>
       <h2>IT, Project Management &amp; Technical</h2>
+      <p class="section-desc">Technical courses to support our digital infrastructure and project delivery.</p>
       <div class="grid" id="grid-it"></div>
     </section>
 
+    <section id="soft-skills" class="section">
+      <h2>Soft Skills</h2>
+      <p class="section-desc">Develop your communication, leadership, and personal effectiveness.</p>
+      <div class="grid" id="grid-soft"></div>
+    </section>
 
+    <section id="apprenticeships" class="section">
+      <h2>Apprenticeships</h2>
+      <p class="section-desc">Levy-funded development pathways. Enrol at any time with manager support.</p>
+      <div class="grid" id="grid-apprenticeships"></div>
+    </section>
 
-
-
-<section id="soft-skills" class="section">
-  <h2 style="margin:0 15px 5px; line-height:1.2;">Soft Skills</h2>
-  <div class="intro">
-    <p>For the full and updated list of courses, please see the DTI newsletter.</p>
-  </div>
-  <p class="subtle-note"
-     style="color:#9aa0a6; font-size:18px; line-height:1.25; margin:0 15px 20px;"></p>
-  <div class="grid" id="grid-soft"></div>
-</section>
-
-
-
-
-<section id="apprenticeships" class="section">
-  <h2 style="margin:0 15px 5px; line-height:1.2;">Apprenticeships</h2>
-  <div class="intro">
-    <p>Apprenticeships are funded via the Apprenticeship Levy and have no cost to the learner. Time commitment and manager approval are required.</p>
-  </div>
-
-
-  <div class="grid" id="grid-apprenticeships"></div>
-</section>
-
-    <section id="contact" class="section">
+    <section id="contact" class="section" style="display: block;">
       <h2>Contact</h2>
-      <div class="intro">
+      <div class="intro-text" style="background: #fff; border: 1px solid #e2e8f0; border-radius: var(--radius); padding: 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.02);">
         <p>E-mail: <a href="mailto:gstt.DTIAcademy@nhs.net">gstt.DTIAcademy@nhs.net</a></p>
-        <p>College of Healthcare Learning Hub: <em>internal access required</em></p>
-       
+        <p>Learning Hub: <em>internal access required</em></p>
       </div>
     </section>
   </main>
@@ -490,7 +359,14 @@ details summary:hover{
 <button class="top" id="topBtn" aria-label="Back to top">↑</button>
 
 <script>
-// Full dataset from your working example + cleaned where needed
+// VARIABLES DEFINED AT THE START TO PREVENT ERRORS
+const searchEl = document.getElementById('q');
+const filtersEl = document.getElementById('filters');
+const spyLinks = [...document.querySelectorAll('#spy a')];
+const topBtn = document.getElementById('topBtn');
+let forcedSections = [];
+
+// DATA PRESERVED EXACTLY AS PROVIDED
 const DATA = [
   // ---------- IT & Technical ----------
   {
@@ -1536,55 +1412,59 @@ const DATA = [
 ];
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-// --- UI ---
-const filtersEl = document.getElementById('filters');
-const chips = ["Free","Paid","Virtual","Teams","Instructor","Provider","Epic","Security","Leadership","Projects","Risk","Data","Excel","Outlook"];
-chips.forEach(t=>{
-  const b=document.createElement('button');
-  b.className='chip'; b.textContent=t;
-  b.onclick=()=>{ b.classList.toggle('active'); render(); };
-  filtersEl.appendChild(b);
-});
-
-function linkify(str){
-  if(!str) return "";
+// SMART LINKIFY FUNCTION
+function linkify(str) {
+  if (!str) return "";
   const emailRx = /([a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,})/g;
-  const urlRx = /(https?:\/\/[^\s<]+)/g;
-  return str.replace(emailRx, '<a href="mailto:$1">$1</a>').replace(urlRx,'<a href="$1">$1</a>');
+  
+  return str.replace(emailRx, (email) => {
+    let displayName = "Email Team";
+    const localPart = email.split('@')[0].toLowerCase();
+    
+    // Check for DT&I Academy specifically
+    if (localPart === 'gstt.dtiacademy') {
+      displayName = "DT&I Academy";
+    } 
+    // Check for ITCS Accessibility specifically
+    else if (localPart === 'itcsaccessibility') {
+      displayName = "ITCS Accessibility Team";
+    }
+    // Handle names (dots)
+    else if (localPart.includes('.')) {
+      displayName = localPart.split('.')
+        .map(part => part.charAt(0).toUpperCase() + part.slice(1))
+        .join(' ');
+      displayName = displayName.replace(/\d+/g, '').trim();
+    } 
+    // Generic Team Fallback
+    else {
+      displayName = localPart.charAt(0).toUpperCase() + localPart.slice(1);
+      displayName = displayName.replace(/([A-Z])/g, ' $1').trim();
+    }
+    
+    return `<a href="mailto:${email}">${displayName}</a>`;
+  });
 }
 
-function courseCard(d){
-  const learnList = d.learn?.map(i=>`<li>${i}</li>`).join('') || '';
-  return `<article class="card" data-tags="${(d.tags||[]).join(' ').toLowerCase()}" data-section="${d.section}">
-    <span class="pill">${d.cost||''}</span>
+function courseCard(d) {
+  const learnList = d.learn?.map(i => `<li>${i}</li>`).join('') || '';
+  return `<article class="card">
+    <span class="pill">${d.cost || ''}</span>
     <div class="head">
       <h3>${d.title}</h3>
       <div class="meta">
-        <span class="badge">${d.duration||'Duration TBC'}</span>
-        <span class="badge">${d.delivery||'Delivery TBC'}</span>
+        <span class="badge">${d.duration || 'Duration TBC'}</span>
+        <span class="badge">${d.delivery || 'Delivery TBC'}</span>
       </div>
     </div>
     <div class="body">
-      ${d.desc?`<p class="desc">${d.desc}</p>`:''}
-      <details open>
+      <details>
         <summary><span class="chev">▶</span> Is this for me?</summary>
-        <div class="block">${d.isForMe||'See details on suitability in the full description.'}</div>
+        <div class="block">${d.isForMe}</div>
       </details>
       <details>
         <summary><span class="chev">▶</span> What does it involve?</summary>
-        <div class="block">${d.involve||'See course outline.'}</div>
+        <div class="block">${d.involve}</div>
       </details>
       <details>
         <summary><span class="chev">▶</span> What will I learn?</summary>
@@ -1592,60 +1472,102 @@ function courseCard(d){
       </details>
       <div class="row">
         <h4>How to book</h4>
-        <div>${linkify(d.how||'Contact the Academy')}</div>
+        <div>${linkify(d.how || 'Contact the Academy')}</div>
       </div>
     </div>
   </article>`;
 }
 
-function render(){
-  const q=(document.getElementById('q').value||'').trim().toLowerCase();
-  const active=[...document.querySelectorAll('.chip.active')].map(x=>x.textContent.toLowerCase());
-const it   = DATA.filter(d=>d.section==='it');
-const soft = DATA.filter(d=>d.section==='soft');
-const apps = DATA.filter(d=>d.section==='apprenticeship');
-  const match=d=>{
-    const hay=(d.title+' '+(d.tags||[]).join(' ')+' '+(d.isForMe||'')+' '+(d.involve||'')+' '+(d.learn||'')+' '+(d.delivery||'')+' '+(d.how||'')+' '+(d.cost||'')).toLowerCase();
-    const qok=q?hay.includes(q):true;
-    const tok=active.length?active.every(t=>hay.includes(t)):true;
+function forceRevealSection(secName) {
+  if (!forcedSections.includes(secName)) forcedSections.push(secName);
+  render();
+}
+
+// SMART HIGHLIGHTER Logic - Ignores hidden sections
+function updateHighlighter() {
+  const scrollPos = window.scrollY + 180;
+  
+  // Rule 1: Page top is always Welcome
+  if (window.scrollY < 100) {
+    spyLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#welcome'));
+    return;
+  }
+
+  // Rule 2: Find the last visible section that is past the scrollPos
+  let currentId = '#welcome';
+  const sectionIds = ['welcome', 'booking', 'it-tech', 'soft-skills', 'apprenticeships', 'contact'];
+  
+  for (const id of sectionIds) {
+    const el = document.getElementById(id);
+    // Use offsetParent to check if section is display:none
+    if (el && el.offsetParent !== null && el.offsetTop <= scrollPos) {
+      currentId = '#' + id;
+    }
+  }
+
+  spyLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === currentId);
+  });
+}
+
+function render() {
+  const q = (searchEl.value || '').trim().toLowerCase();
+  const activeFilters = [...document.querySelectorAll('.chip.active')].map(x => x.textContent.toLowerCase());
+  
+  const match = d => {
+    const hay = (d.title + ' ' + (d.tags || []).join(' ') + ' ' + (d.isForMe || '') + ' ' + (d.cost || '')).toLowerCase();
+    const qok = q ? hay.includes(q) : true;
+    const tok = activeFilters.length ? activeFilters.every(t => hay.includes(t)) : true;
     return qok && tok;
   };
-  const itOut=it.filter(match).map(courseCard).join('');
-  const softOut=soft.filter(match).map(courseCard).join('');
-  const appsOut = apps.filter(match).map(courseCard).join('');
-  document.getElementById('grid-it').innerHTML=itOut || `<div class="empty">No IT/Technical matches. Try different filters.</div>`;
-  document.getElementById('grid-soft').innerHTML=softOut || `<div class="empty">No Soft Skills matches. Try different filters.</div>`;
-document.getElementById('grid-apprenticeships').innerHTML = appsOut || `<div class="empty">No Apprenticeship matches. Try different filters.</div>`;
-}
-render();
 
-// keyboard shortcut
-const searchEl=document.getElementById('q');
-window.addEventListener('keydown',(e)=>{
-  if((e.metaKey||e.ctrlKey)&&e.key.toLowerCase()==='k'){e.preventDefault();searchEl.focus();}
-});
+  const sectionMap = [
+    { id: 'it-tech', grid: 'grid-it', name: 'it' },
+    { id: 'soft-skills', grid: 'grid-soft', name: 'soft' },
+    { id: 'apprenticeships', grid: 'grid-apprenticeships', name: 'apprenticeship' }
+  ];
 
-// print
-document.getElementById('printBtn').onclick=()=>window.print();
-
-// scrollspy + back-to-top
-const spyLinks=[...document.querySelectorAll('#spy a')];
-const sections=spyLinks.map(a=>document.querySelector(a.getAttribute('href')));
-const topBtn=document.getElementById('topBtn');
-const obs=new IntersectionObserver((entries)=>{
-  entries.forEach(entry=>{
-    const id='#'+entry.target.id;
-    if(entry.isIntersecting){
-      spyLinks.forEach(a=>a.classList.toggle('active',a.getAttribute('href')===id));
+  sectionMap.forEach(s => {
+    const results = DATA.filter(d => d.section === s.name && match(d));
+    const container = document.getElementById(s.id);
+    const grid = document.getElementById(s.grid);
+    
+    // Logic: Section is active if searching, filtering, or forced by menu click
+    const isActive = q.length > 0 || activeFilters.length > 0 || forcedSections.includes(s.name);
+    
+    if (isActive && results.length > 0) {
+      grid.innerHTML = results.map(courseCard).join('');
+      container.style.display = 'block';
+    } else {
+      container.style.display = 'none';
     }
   });
-},{rootMargin:'-60% 0px -35% 0px',threshold:[0,1]});
-sections.forEach(s=>obs.observe(s));
-window.addEventListener('scroll',()=>{topBtn.style.display=window.scrollY>500?'block':'none';});
-topBtn.onclick=()=>window.scrollTo({top:0,behavior:'smooth'});
+  
+  updateHighlighter();
+}
 
-// live search
-searchEl.addEventListener('input',render);
+// Build Filter Chips - ADDED MORE OPTIONS PER REQUEST
+const chipList = ["Free","Paid","Virtual","Instructor","Provider","Epic","Security","Leadership","Data","Apprenticeship","AI","Excel","Project Management","Communication","Business Analysis","Networking"];
+chipList.forEach(t => {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.textContent = t;
+  b.onclick = () => { b.classList.toggle('active'); render(); };
+  filtersEl.appendChild(b);
+});
+
+// Event Listeners
+searchEl.addEventListener('input', () => {
+  forcedSections = []; // Typing clears manual "force" to show only search results
+  render();
+});
+
+window.addEventListener('scroll', updateHighlighter);
+
+topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+// Initial Page Load
+render();
+updateHighlighter();
 </script>
 </body>
 </html>
