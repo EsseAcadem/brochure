@@ -29,7 +29,11 @@ OUTPUT_PATH = Path(os.getenv('CATALOGUE_OUTPUT', 'data/knowledge-academy-courses
 REQUEST_TIMEOUT = 35
 MINIMUM_COURSES = int(os.getenv('MINIMUM_COURSES', '150'))
 MAX_SITEMAPS = int(os.getenv('MAX_SITEMAPS', '80'))
-USER_AGENT = 'DTI-Academy-Catalogue-Refresh/1.0 (+static training catalogue)'
+USER_AGENT = (
+    'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 '
+    '(KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36 '
+    'DTI-Academy-Catalogue-Refresh/1.1'
+)
 
 CATEGORY_PATHS = {
     'agile-project-management-training': 'Agile Project Management',
@@ -226,11 +230,15 @@ def load_existing() -> dict:
         return {'courses': []}
 
 
-def validate(courses: list[dict], previous_count: int) -> None:
+def validate(courses: list[dict], previous_count: int, previous_status: str) -> None:
     count = len(courses)
     if count < MINIMUM_COURSES:
         raise RuntimeError(f'Refusing to replace the catalogue: only {count} courses were found (minimum {MINIMUM_COURSES}).')
-    if previous_count >= MINIMUM_COURSES and count < int(previous_count * 0.55):
+    # The repository starts with a manually prepared seed catalogue. Its count is
+    # not a valid live baseline, so allow the first successful scrape to replace it.
+    # Once a live catalogue exists, protect later runs from a sudden large drop.
+    has_live_baseline = previous_status == 'live catalogue refresh'
+    if has_live_baseline and previous_count >= MINIMUM_COURSES and count < int(previous_count * 0.55):
         raise RuntimeError(f'Refusing a suspicious catalogue drop from {previous_count} to {count} courses.')
     blocked = [item['title'] for item in courses if BLOCKED_TERMS.search(item['title'])]
     if blocked:
@@ -249,6 +257,12 @@ def main() -> int:
     })
     existing = load_existing()
     previous_count = len(existing.get('courses', []))
+    previous_status = str(existing.get('status', '')).strip().lower()
+    if previous_status != 'live catalogue refresh':
+        print(
+            f'Initial migration: existing catalogue status is {previous_status or "unknown"!r}; '
+            'the first live result will become the safety baseline.'
+        )
 
     found = discover_from_sitemaps(session)
     found.update(discover_from_category_pages(session))
@@ -272,7 +286,7 @@ def main() -> int:
         for course in by_title.values()
     ]
     records.sort(key=lambda item: (item['category'].lower(), item['title'].lower()))
-    validate(records, previous_count)
+    validate(records, previous_count, previous_status)
 
     payload = {
         'schemaVersion': 1,
