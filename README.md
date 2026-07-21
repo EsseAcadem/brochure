@@ -1,2 +1,0 @@
-# brochure
-Training Brochure
