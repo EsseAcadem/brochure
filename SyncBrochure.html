@@ -1415,6 +1415,74 @@
     .family-btn { width: 100%; }
   }
 
+
+  /* --- Clean page modes --- */
+  body.catalogue-view .hero-search,
+  body.catalogue-view #booking,
+  body.catalogue-view #contact {
+    display: none !important;
+  }
+
+  body.catalogue-view .compact-search {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, 0);
+  }
+
+  body.catalogue-view .content {
+    padding-top: 64px;
+  }
+
+  body.catalogue-view .section {
+    margin-top: 24px;
+  }
+
+  body.catalogue-view .section-desc {
+    display: none;
+  }
+
+  body.booking-view .hero-search,
+  body.booking-view #it-tech,
+  body.booking-view #soft-skills,
+  body.booking-view #apprenticeships,
+  body.booking-view #contact {
+    display: none !important;
+  }
+
+  body.booking-view #booking {
+    display: block !important;
+    margin-top: 34px !important;
+  }
+
+  body.contact-view .hero-search,
+  body.contact-view #booking,
+  body.contact-view #it-tech,
+  body.contact-view #soft-skills,
+  body.contact-view #apprenticeships {
+    display: none !important;
+  }
+
+  body.contact-view #contact {
+    display: block !important;
+    margin-top: 34px;
+  }
+
+  body.booking-view .compact-search,
+  body.contact-view .compact-search {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  @media (max-width: 760px) {
+    body.catalogue-view .content {
+      padding-top: 58px;
+    }
+
+    body.catalogue-view .section {
+      margin-top: 18px;
+    }
+  }
+
 </style>
 </head>
 <body>
@@ -1456,7 +1524,7 @@
 
     <section id="booking" class="section" style="margin-top: 40px; display: block;">
       <details class="booking-toggle">
-        <summary>Process & How to book</summary>
+        <summary tabindex="-1">Process & How to book</summary>
         <div class="intro-text">
           <ul>
             <li><strong>Free courses:</strong> Delivered by the Essentia Academy or Trust. Ask your manager, then e-mail the contact on the specific course card.</li>
@@ -1629,7 +1697,23 @@ const apprenticeshipPathContent = [
   }
 ];
 let forcedSections = [];
+let currentPageMode = 'home';
 let pendingApprenticeshipAction = 'nav';
+
+function setPageMode(mode) {
+  currentPageMode = mode;
+  document.body.classList.toggle('catalogue-view', mode === 'catalogue');
+  document.body.classList.toggle('booking-view', mode === 'booking');
+  document.body.classList.toggle('contact-view', mode === 'contact');
+
+  if (mode === 'catalogue') {
+    document.body.classList.add('search-compact');
+    compactSearch?.setAttribute('aria-hidden', 'false');
+  } else {
+    document.body.classList.remove('search-compact');
+    compactSearch?.setAttribute('aria-hidden', 'true');
+  }
+}
 function getApprenticeshipGateAccepted() {
   try { return sessionStorage.getItem('dti-apprenticeship-gate-accepted') === 'true'; }
   catch (error) { return false; }
@@ -3400,7 +3484,11 @@ function courseCard(d) {
 }
 
 function forceRevealSection(secName) {
-  if (!forcedSections.includes(secName)) forcedSections.push(secName);
+  forcedSections = [secName];
+  document.querySelectorAll('.chip.active').forEach(chip => chip.classList.remove('active'));
+  searchEl.value = '';
+  if (compactSearchEl) compactSearchEl.value = '';
+  setPageMode('catalogue');
   render();
 }
 
@@ -3440,12 +3528,11 @@ function closeApprenticeshipGate() {
 }
 
 function revealApprenticeships(source = 'nav') {
-  if (source === 'filter') {
-    const apprenticeshipChip = [...document.querySelectorAll('.chip')]
-      .find(chip => chip.textContent.trim().toLowerCase() === 'apprenticeship');
-    if (apprenticeshipChip) apprenticeshipChip.classList.add('active');
-  }
-  if (!forcedSections.includes('apprenticeship')) forcedSections.push('apprenticeship');
+  forcedSections = ['apprenticeship'];
+  document.querySelectorAll('.chip.active').forEach(chip => chip.classList.remove('active'));
+  searchEl.value = '';
+  if (compactSearchEl) compactSearchEl.value = '';
+  setPageMode('catalogue');
   render();
   requestAnimationFrame(() => {
     document.getElementById('apprenticeships').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -3474,6 +3561,19 @@ function updateApprenticeshipGateProgress() {
 
 function updateCompactSearchVisibility() {
   if (!heroSearch || !connectHeader || !compactSearch) return;
+
+  if (currentPageMode === 'catalogue') {
+    document.body.classList.add('search-compact');
+    compactSearch.setAttribute('aria-hidden', 'false');
+    return;
+  }
+
+  if (currentPageMode === 'booking' || currentPageMode === 'contact') {
+    document.body.classList.remove('search-compact');
+    compactSearch.setAttribute('aria-hidden', 'true');
+    return;
+  }
+
   const headerBottom = connectHeader.getBoundingClientRect().bottom;
   const heroBottom = heroSearch.getBoundingClientRect().bottom;
   const shouldCompact = heroBottom <= headerBottom + 8;
@@ -3649,6 +3749,9 @@ chipList.forEach(t => {
       return;
     }
     b.classList.toggle('active');
+    forcedSections = [];
+    const hasActiveFilters = document.querySelector('.chip.active') !== null;
+    setPageMode(hasActiveFilters ? 'catalogue' : 'home');
     render();
   };
   filtersEl.appendChild(b);
@@ -3658,7 +3761,9 @@ chipList.forEach(t => {
 function applySearchValue(value, source) {
   if (source !== searchEl) searchEl.value = value;
   if (compactSearchEl && source !== compactSearchEl) compactSearchEl.value = value;
-  forcedSections = []; // Typing clears manual "force" to show only search results
+  forcedSections = [];
+  document.querySelectorAll('.chip.active').forEach(chip => chip.classList.remove('active'));
+  setPageMode(value.trim() ? 'catalogue' : 'home');
   render();
 }
 
@@ -3702,16 +3807,74 @@ document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape' && !apprenticeshipGate.hidden) closeApprenticeshipGate();
 });
 
+
+const bookingNavLink = document.querySelector('#spy a[href="#booking"]');
+const bookingPanel = document.querySelector('#booking .booking-toggle');
+
+if (bookingNavLink && bookingPanel) {
+  bookingNavLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    forcedSections = [];
+    setPageMode('booking');
+    bookingPanel.open = true;
+    render();
+
+    requestAnimationFrame(() => {
+      document.getElementById('booking').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
+
+    window.setTimeout(() => {
+      const summary = bookingPanel.querySelector('summary');
+      if (summary) summary.focus({ preventScroll: true });
+    }, 450);
+  });
+}
+
 const searchNavLink = document.querySelector('#spy a[href="#welcome"]');
 if (searchNavLink) {
-  searchNavLink.addEventListener('click', () => {
+  searchNavLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    forcedSections = [];
+    searchEl.value = '';
+    if (compactSearchEl) compactSearchEl.value = '';
+    document.querySelectorAll('.chip.active').forEach(chip => chip.classList.remove('active'));
+    setPageMode('home');
+    render();
+
+    document.getElementById('welcome').scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+
     window.setTimeout(() => searchEl.focus({ preventScroll: true }), 450);
+  });
+}
+
+
+const contactNavLink = document.querySelector('#spy a[href="#contact"]');
+if (contactNavLink) {
+  contactNavLink.addEventListener('click', (event) => {
+    event.preventDefault();
+    forcedSections = [];
+    setPageMode('contact');
+    render();
+
+    requestAnimationFrame(() => {
+      document.getElementById('contact').scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    });
   });
 }
 
 topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
 // Initial Page Load
+setPageMode('home');
 render();
 updateHighlighter();
 updateCompactSearchVisibility();
