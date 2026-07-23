@@ -1417,6 +1417,17 @@
 
 
   /* --- Clean page modes --- */
+  body.home-view #it-tech,
+  body.home-view #soft-skills,
+  body.home-view #apprenticeships,
+  body.home-view #contact {
+    display: none !important;
+  }
+
+  body.home-view #booking {
+    display: block !important;
+  }
+
   body.catalogue-view .hero-search,
   body.catalogue-view #booking,
   body.catalogue-view #contact {
@@ -1441,7 +1452,6 @@
     display: none;
   }
 
-  body.booking-view .hero-search,
   body.booking-view #it-tech,
   body.booking-view #soft-skills,
   body.booking-view #apprenticeships,
@@ -1449,9 +1459,9 @@
     display: none !important;
   }
 
+  body.booking-view .hero-search,
   body.booking-view #booking {
     display: block !important;
-    margin-top: 34px !important;
   }
 
   body.contact-view .hero-search,
@@ -1467,6 +1477,7 @@
     margin-top: 34px;
   }
 
+  body.home-view .compact-search,
   body.booking-view .compact-search,
   body.contact-view .compact-search {
     opacity: 0;
@@ -1698,13 +1709,23 @@ const apprenticeshipPathContent = [
 ];
 let forcedSections = [];
 let currentPageMode = 'home';
+let currentNavHref = '#welcome';
 let pendingApprenticeshipAction = 'nav';
 
-function setPageMode(mode) {
+function setActiveNav(href) {
+  currentNavHref = href;
+  spyLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === href);
+  });
+}
+
+function setPageMode(mode, navHref = currentNavHref) {
   currentPageMode = mode;
+  document.body.classList.toggle('home-view', mode === 'home');
   document.body.classList.toggle('catalogue-view', mode === 'catalogue');
   document.body.classList.toggle('booking-view', mode === 'booking');
   document.body.classList.toggle('contact-view', mode === 'contact');
+  setActiveNav(navHref);
 
   if (mode === 'catalogue') {
     document.body.classList.add('search-compact');
@@ -3488,7 +3509,7 @@ function forceRevealSection(secName) {
   document.querySelectorAll('.chip.active').forEach(chip => chip.classList.remove('active'));
   searchEl.value = '';
   if (compactSearchEl) compactSearchEl.value = '';
-  setPageMode('catalogue');
+  setPageMode('catalogue', `#${secName === 'it' ? 'it-tech' : secName === 'soft' ? 'soft-skills' : 'apprenticeships'}`);
   render();
 }
 
@@ -3532,7 +3553,7 @@ function revealApprenticeships(source = 'nav') {
   document.querySelectorAll('.chip.active').forEach(chip => chip.classList.remove('active'));
   searchEl.value = '';
   if (compactSearchEl) compactSearchEl.value = '';
-  setPageMode('catalogue');
+  setPageMode('catalogue', '#apprenticeships');
   render();
   requestAnimationFrame(() => {
     document.getElementById('apprenticeships').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -3581,31 +3602,33 @@ function updateCompactSearchVisibility() {
   compactSearch.setAttribute('aria-hidden', shouldCompact ? 'false' : 'true');
 }
 
-// SMART HIGHLIGHTER Logic - Ignores hidden sections
+// Keep the selected menu pill aligned with the current page mode.
 function updateHighlighter() {
-  const scrollPos = window.scrollY + 180;
-  
-  // Rule 1: Page top is always Welcome
-  if (window.scrollY < 100) {
-    spyLinks.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '#welcome'));
+  if (currentPageMode === 'catalogue') {
+    if (forcedSections.length === 1) {
+      const sectionHref = {
+        it: '#it-tech',
+        soft: '#soft-skills',
+        apprenticeship: '#apprenticeships'
+      }[forcedSections[0]];
+      if (sectionHref) setActiveNav(sectionHref);
+    } else {
+      setActiveNav('#welcome');
+    }
     return;
   }
 
-  // Rule 2: Find the last visible section that is past the scrollPos
-  let currentId = '#welcome';
-  const sectionIds = ['welcome', 'booking', 'it-tech', 'soft-skills', 'apprenticeships', 'contact'];
-  
-  for (const id of sectionIds) {
-    const el = document.getElementById(id);
-    // Use offsetParent to check if section is display:none
-    if (el && el.offsetParent !== null && el.offsetTop <= scrollPos) {
-      currentId = '#' + id;
-    }
+  if (currentPageMode === 'booking') {
+    setActiveNav('#booking');
+    return;
   }
 
-  spyLinks.forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === currentId);
-  });
+  if (currentPageMode === 'contact') {
+    setActiveNav('#contact');
+    return;
+  }
+
+  setActiveNav('#welcome');
 }
 
 
@@ -3751,7 +3774,7 @@ chipList.forEach(t => {
     b.classList.toggle('active');
     forcedSections = [];
     const hasActiveFilters = document.querySelector('.chip.active') !== null;
-    setPageMode(hasActiveFilters ? 'catalogue' : 'home');
+    setPageMode(hasActiveFilters ? 'catalogue' : 'home', '#welcome');
     render();
   };
   filtersEl.appendChild(b);
@@ -3763,7 +3786,7 @@ function applySearchValue(value, source) {
   if (compactSearchEl && source !== compactSearchEl) compactSearchEl.value = value;
   forcedSections = [];
   document.querySelectorAll('.chip.active').forEach(chip => chip.classList.remove('active'));
-  setPageMode(value.trim() ? 'catalogue' : 'home');
+  setPageMode(value.trim() ? 'catalogue' : 'home', '#welcome');
   render();
 }
 
@@ -3815,7 +3838,7 @@ if (bookingNavLink && bookingPanel) {
   bookingNavLink.addEventListener('click', (event) => {
     event.preventDefault();
     forcedSections = [];
-    setPageMode('booking');
+    setPageMode('booking', '#booking');
     bookingPanel.open = true;
     render();
 
@@ -3841,7 +3864,8 @@ if (searchNavLink) {
     searchEl.value = '';
     if (compactSearchEl) compactSearchEl.value = '';
     document.querySelectorAll('.chip.active').forEach(chip => chip.classList.remove('active'));
-    setPageMode('home');
+    if (bookingPanel) bookingPanel.open = false;
+    setPageMode('home', '#welcome');
     render();
 
     document.getElementById('welcome').scrollIntoView({
@@ -3859,7 +3883,7 @@ if (contactNavLink) {
   contactNavLink.addEventListener('click', (event) => {
     event.preventDefault();
     forcedSections = [];
-    setPageMode('contact');
+    setPageMode('contact', '#contact');
     render();
 
     requestAnimationFrame(() => {
@@ -3874,7 +3898,8 @@ if (contactNavLink) {
 topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
 // Initial Page Load
-setPageMode('home');
+if (bookingPanel) bookingPanel.open = false;
+setPageMode('home', '#welcome');
 render();
 updateHighlighter();
 updateCompactSearchVisibility();
